@@ -1,11 +1,15 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { WebView } from "react-native-webview";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const RoverMonitoring = () => {
   return (
-    <View>
-      <Text>RoverMonitoring</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <WebView
+        source={{ uri: "https://sample-web-ui-rho.vercel.app/" }}
+        style={{ flex: 1 }}
+      />
+    </SafeAreaView>
   );
 };
 
