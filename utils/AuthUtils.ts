@@ -29,7 +29,7 @@ export const signUp = async (
 export const login = async (
   email: string,
   password: string,
-  rememberMe: string
+  rememberMe?: string
 ) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
