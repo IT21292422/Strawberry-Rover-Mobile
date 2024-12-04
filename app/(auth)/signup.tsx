@@ -5,13 +5,31 @@ import Images from "@/constants/Images";
 import CustomInputField from "@/components/CustomInputField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
+import { signUp } from "@/utils/AuthUtils";
 
 const SignUp = () => {
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSignUp = async () => {
+    const { username, email, password } = form;
+    try {
+      setLoading(true);
+      await signUp(username, email, password, true);
+      router.push("/home");
+    } catch (error) {
+      console.error("Error signing up: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ImageBackground
       source={Images.primaryBackground}
@@ -46,15 +64,16 @@ const SignUp = () => {
           <CustomInputField
             placeholder="Confirm Password"
             type="password"
-            value={form.password}
+            value={form.confirmPassword}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             containerStyles="mt-7"
           />
           <CustomButton
-            label="Sign Up"
-            onPress={() => router.push("/home")}
+            label={loading ? "Signing Up..." : "Sign Up"}
+            onPress={handleSignUp}
             containerStyles="mt-7"
             textStyles="text-white"
+            disabled={loading}
           />
           <View className="justify-center pt-5 flex-row gap-2 items-center">
             <Text className="text-lg">Already have an account?</Text>

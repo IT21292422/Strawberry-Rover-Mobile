@@ -2,24 +2,31 @@ import { auth } from "@/config/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { saveToken, getToken, removeToken } from "./SecureStoreUtils";
+import useAuthStore from "@/store/AuthStore";
 
 export const signUp = async (
+  username: string,
   email: string,
   password: string,
   rememberMe: boolean
 ) => {
   try {
+    const setUser = useAuthStore((state) => state.setUser);
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    const token = await userCredential.user.getIdToken();
+    const user = userCredential.user;
+    await updateProfile(user, { displayName: username });
+    const token = await user.getIdToken();
     if (rememberMe) {
       await saveToken("authToken", token);
     }
+    setUser(userCredential.user);
     console.log("User signed up and token stored successfully");
   } catch (error) {
     console.error("Error signing up: ", error);
@@ -32,6 +39,7 @@ export const login = async (
   rememberMe?: string
 ) => {
   try {
+    const setUser = useAuthStore((state) => state.setUser);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -41,6 +49,7 @@ export const login = async (
     if (rememberMe) {
       await saveToken("authToken", token);
     }
+    setUser(userCredential.user);
     console.log("User logged in and token stored");
   } catch (error) {
     console.error("Error logging in: ", error);
@@ -60,6 +69,9 @@ export const authenticateUser = async () => {
 
 export const logout = async () => {
   //TODO Logout User
+  const setUser = useAuthStore((state) => state.setUser);
+  await auth.signOut();
   await removeToken("authToken");
+  setUser(null);
   console.log("User logged out and token removed");
 };
