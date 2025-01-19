@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import CustomInputField from "@/components/CustomInputField";
@@ -46,10 +46,14 @@ const Analytics = () => {
           handleChangeText={(e) => setRoverId(e)}
           containerStyles="mt-7"
         />
-        <View className="mt-10 w-full h-fit border border-gray-300 rounded-lg">
-          {isStatusError ? (
+        <View className="mt-10 w-full h-32 border border-gray-300 rounded-lg">
+          {getStatusPending ? (
+            <View className="flex justify-center items-center h-full">
+              <ActivityIndicator size="large" />
+            </View>
+          ) : isStatusError ? (
             <Text className="p-5 text-xl text-center">
-              statusError.toString()
+              {statusError.toString()}
             </Text>
           ) : (
             currentOperationStatus && (
@@ -118,7 +122,11 @@ const Analytics = () => {
         </View>
         <Text className="text-center mt-5 text-2xl">Status = {status}</Text>
         <View className="mt-5 w-full h-24 border border-gray-300 rounded-lg">
-          {isUpdateRoverError ? (
+          {updateRoverPending ? (
+            <View className="flex justify-center items-center h-full">
+              <ActivityIndicator size="large" />
+            </View>
+          ) : isUpdateRoverError ? (
             <Text className="p-5 text-xl text-center">
               {updateRoverError.toString()}
             </Text>

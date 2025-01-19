@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "strw-frontend",
+    "name": "Strawberry Rover",
     "slug": "strw-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.iamakmal.strwfrontend"
     },
     "web": {
       "bundler": "metro",
@@ -32,6 +33,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "27872fa4-6f2c-4fd5-ac7e-c4e17b39c147"
+      }
     }
   }
 }
