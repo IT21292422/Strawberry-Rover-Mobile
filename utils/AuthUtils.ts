@@ -6,7 +6,7 @@ import {
   updateProfile,
   User,
 } from "firebase/auth";
-import { saveItem, removeItem } from "./SecureStoreUtils";
+import { saveItem, removeItem, getItem } from "./SecureStoreUtils";
 import { Alert } from "react-native";
 import { router } from "expo-router";
 
@@ -29,10 +29,11 @@ export const signUp = async (
     console.log("Token: " + token);
     if (rememberMe) {
       await saveItem("authToken", token);
+      console.log("Token Saved Successfully");
     }
     setUser(userCredential.user);
     console.log(user);
-    console.log("User signed up and token stored successfully");
+    console.log("User signed up successfully");
   } catch (error: any) {
     const errorMessage =
       error.code === "auth/email-already-in-use"
@@ -61,24 +62,40 @@ export const login = async (
     const token = await userCredential.user.getIdToken();
     if (rememberMe) {
       await saveItem("authToken", token);
+      console.log("Token Saved Successfully");
     }
     setUser(userCredential.user);
-    console.log("User logged in and token stored");
+    console.log("User logged in successfully");
   } catch (error) {
     console.error("Error logging in: ", error);
   }
 };
 
-export const initializeAuth = (setUser: (user: User) => void) => {
-  onAuthStateChanged(auth, (user) => {
-    console.log("USER: " + user + " " + user?.email);
-    if (user) {
-      setUser(user);
-      router.replace("/home");
+export const initializeAuth = async (setUser: (user: User | null) => void) => {
+  try {
+    const savedToken = await getItem("authToken");
+    if (savedToken) {
+      console.log("Token found in secure storage...");
+      onAuthStateChanged(auth, (user) => {
+        console.log("USER: " + user + " " + user?.email);
+        if (user) {
+          console.log("User authenticated via token.");
+          setUser(user);
+          router.replace("/home");
+        } else {
+          console.log("User token expired or invalid.");
+          setUser(null);
+          router.replace("/signin");
+        }
+      });
     } else {
+      console.log("No token found. Redirecting to sign-in...");
       router.replace("/signin");
     }
-  });
+  } catch (error) {
+    console.error("Error during initialization:", error);
+    router.replace("/signin");
+  }
 };
 
 export const logout = async (setUser: (user: User | null) => void) => {

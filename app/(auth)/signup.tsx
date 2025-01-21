@@ -7,6 +7,7 @@ import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import { signUp } from "@/utils/AuthUtils";
 import useAuthStore from "@/store/AuthStore";
+import { Checkbox } from "react-native-paper";
 
 const SignUp = () => {
   const setUser = useAuthStore((state) => state.setUser);
@@ -16,6 +17,7 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+  const [checked, setChecked] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +33,7 @@ const SignUp = () => {
     }
     try {
       setLoading(true);
-      await signUp(username, email, password, true, setUser);
+      await signUp(username, email, password, checked, setUser);
       router.replace("/home");
     } catch (error) {
       console.error("Error signing up: ", error);
@@ -78,10 +80,19 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
             containerStyles="mt-7"
           />
+          <View className="flex-row items-center mt-3">
+            <Checkbox
+              status={checked ? "checked" : "unchecked"}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+            <Text className="text-lg">Remember Me</Text>
+          </View>
           <CustomButton
             label={loading ? "Signing Up..." : "Sign Up"}
             onPress={handleSignUp}
-            containerStyles="mt-7"
+            containerStyles="mt-3"
             textStyles="text-white"
             disabled={loading}
           />
