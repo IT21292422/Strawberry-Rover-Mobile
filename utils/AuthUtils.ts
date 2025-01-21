@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   updateProfile,
+  User,
 } from "firebase/auth";
 import { saveItem, removeItem } from "./SecureStoreUtils";
 import { Alert } from "react-native";
@@ -14,7 +15,7 @@ export const signUp = async (
   email: string,
   password: string,
   rememberMe: boolean,
-  setUser: (user: any) => void
+  setUser: (user: User) => void
 ) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -25,6 +26,7 @@ export const signUp = async (
     const user = userCredential.user;
     await updateProfile(user, { displayName: username });
     const token = await user.getIdToken();
+    console.log("Token: " + token);
     if (rememberMe) {
       await saveItem("authToken", token);
     }
@@ -48,7 +50,7 @@ export const login = async (
   email: string,
   password: string,
   rememberMe: boolean,
-  setUser: (user: any) => void
+  setUser: (user: User) => void
 ) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -67,7 +69,7 @@ export const login = async (
   }
 };
 
-export const initializeAuth = (setUser: (user: any) => void) => {
+export const initializeAuth = (setUser: (user: User) => void) => {
   onAuthStateChanged(auth, (user) => {
     console.log("USER: " + user + " " + user?.email);
     if (user) {
@@ -79,7 +81,7 @@ export const initializeAuth = (setUser: (user: any) => void) => {
   });
 };
 
-export const logout = async (setUser: (user: any) => void) => {
+export const logout = async (setUser: (user: User | null) => void) => {
   try {
     await auth.signOut();
     await removeItem("authToken");

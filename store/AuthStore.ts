@@ -1,13 +1,14 @@
+import { User } from "firebase/auth";
 import { create } from "zustand";
 
 interface AuthStoreType {
-  user: any;
-  setUser: (user: any) => void;
+  user: User | null;
+  setUser: (user: User | null) => void;
 }
 
 const useAuthStore = create<AuthStoreType>((set) => ({
   user: null,
-  setUser: (user: any) => set({ user }),
+  setUser: (user: User | null) => set({ user }),
 }));
 
 export default useAuthStore;
