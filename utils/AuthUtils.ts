@@ -1,20 +1,22 @@
 import { auth } from "@/config/firebase";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { saveToken, getToken, removeToken } from "./SecureStoreUtils";
-import useAuthStore from "@/store/AuthStore";
+import { saveItem, removeItem } from "./SecureStoreUtils";
+import { Alert } from "react-native";
+import { router } from "expo-router";
 
 export const signUp = async (
   username: string,
   email: string,
   password: string,
-  rememberMe: boolean
+  rememberMe: boolean,
+  setUser: (user: any) => void
 ) => {
   try {
-    const setUser = useAuthStore((state) => state.setUser);
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -24,11 +26,20 @@ export const signUp = async (
     await updateProfile(user, { displayName: username });
     const token = await user.getIdToken();
     if (rememberMe) {
-      await saveToken("authToken", token);
+      await saveItem("authToken", token);
     }
     setUser(userCredential.user);
+    console.log(user);
     console.log("User signed up and token stored successfully");
-  } catch (error) {
+  } catch (error: any) {
+    const errorMessage =
+      error.code === "auth/email-already-in-use"
+        ? "The email is already registered."
+        : error.code === "auth/weak-password"
+        ? "Password is too weak."
+        : "An error occurred.";
+    console.error(errorMessage, error);
+    Alert.alert("Sign-Up Error", errorMessage);
     console.error("Error signing up: ", error);
   }
 };
@@ -36,10 +47,10 @@ export const signUp = async (
 export const login = async (
   email: string,
   password: string,
-  rememberMe?: string
+  rememberMe: boolean,
+  setUser: (user: any) => void
 ) => {
   try {
-    const setUser = useAuthStore((state) => state.setUser);
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -47,7 +58,7 @@ export const login = async (
     );
     const token = await userCredential.user.getIdToken();
     if (rememberMe) {
-      await saveToken("authToken", token);
+      await saveItem("authToken", token);
     }
     setUser(userCredential.user);
     console.log("User logged in and token stored");
@@ -56,22 +67,25 @@ export const login = async (
   }
 };
 
-export const authenticateUser = async () => {
-  const token = await getToken("authToken");
-  if (token) {
-    //TODO Authenticate User
-    console.log("User is authenticated with token: ", token);
-  } else {
-    //Redirect to login screen
-    console.log("No token found, redirecting to login");
-  }
+export const initializeAuth = (setUser: (user: any) => void) => {
+  onAuthStateChanged(auth, (user) => {
+    console.log("USER: " + user + " " + user?.email);
+    if (user) {
+      setUser(user);
+      router.replace("/home");
+    } else {
+      router.replace("/signin");
+    }
+  });
 };
 
-export const logout = async () => {
-  //TODO Logout User
-  const setUser = useAuthStore((state) => state.setUser);
-  await auth.signOut();
-  await removeToken("authToken");
-  setUser(null);
-  console.log("User logged out and token removed");
+export const logout = async (setUser: (user: any) => void) => {
+  try {
+    await auth.signOut();
+    await removeItem("authToken");
+    setUser(null);
+    console.log("User logged out and token removed");
+  } catch (error) {
+    console.error("Error during logout:", error);
+  }
 };

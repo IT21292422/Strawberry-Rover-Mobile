@@ -1,4 +1,4 @@
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View, Text, Image, ImageBackground, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Images from "@/constants/Images";
@@ -6,8 +6,10 @@ import CustomInputField from "@/components/CustomInputField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import { signUp } from "@/utils/AuthUtils";
+import useAuthStore from "@/store/AuthStore";
 
 const SignUp = () => {
+  const setUser = useAuthStore((state) => state.setUser);
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -18,11 +20,19 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
-    const { username, email, password } = form;
+    const { username, email, password, confirmPassword } = form;
+    if (!username || !email || !password || !confirmPassword) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "Passwords do not match");
+      return;
+    }
     try {
       setLoading(true);
-      await signUp(username, email, password, true);
-      router.push("/home");
+      await signUp(username, email, password, true, setUser);
+      router.replace("/home");
     } catch (error) {
       console.error("Error signing up: ", error);
     } finally {
@@ -65,7 +75,7 @@ const SignUp = () => {
             placeholder="Confirm Password"
             type="password"
             value={form.confirmPassword}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
+            handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
             containerStyles="mt-7"
           />
           <CustomButton

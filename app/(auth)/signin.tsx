@@ -1,16 +1,39 @@
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View, Text, ImageBackground, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Images from "@/constants/Images";
 import CustomInputField from "@/components/CustomInputField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
+import { login } from "@/utils/AuthUtils";
+import useAuthStore from "@/store/AuthStore";
 
 const SignIn = () => {
+  const setUser = useAuthStore((state) => state.setUser);
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    const { email, password } = form;
+    if (!email || !password) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+    try {
+      setLoading(true);
+      await login(email, password, true, setUser);
+      router.replace("/home");
+    } catch (error) {
+      console.error("Error signing in: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ImageBackground
       source={Images.primaryBackground}
@@ -35,10 +58,11 @@ const SignIn = () => {
             containerStyles="mt-7"
           />
           <CustomButton
-            label="Sign In"
-            onPress={() => router.push("/home")}
+            label={loading ? "Signing In..." : "Sign In"}
+            onPress={handleSignIn}
             containerStyles="mt-7"
             textStyles="text-white"
+            disabled={loading}
           />
           <View className="justify-center pt-5 flex-row gap-2 items-center">
             <Text className="text-lg">Don't have an account?</Text>
