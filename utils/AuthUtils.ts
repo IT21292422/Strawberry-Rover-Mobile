@@ -17,34 +17,22 @@ export const signUp = async (
   rememberMe: boolean,
   setUser: (user: User) => void
 ) => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-    await updateProfile(user, { displayName: username });
-    const token = await user.getIdToken();
-    console.log("Token: " + token);
-    if (rememberMe) {
-      await saveItem("authToken", token);
-      console.log("Token Saved Successfully");
-    }
-    setUser(userCredential.user);
-    console.log(user);
-    console.log("User signed up successfully");
-  } catch (error: any) {
-    const errorMessage =
-      error.code === "auth/email-already-in-use"
-        ? "The email is already registered."
-        : error.code === "auth/weak-password"
-        ? "Password is too weak."
-        : "An error occurred.";
-    console.error(errorMessage, error);
-    Alert.alert("Sign-Up Error", errorMessage);
-    console.error("Error signing up: ", error);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  const user = userCredential.user;
+  await updateProfile(user, { displayName: username });
+  const token = await user.getIdToken();
+  console.log("Token: " + token);
+  if (rememberMe) {
+    await saveItem("authToken", token);
+    console.log("Token Saved Successfully");
   }
+  setUser(userCredential.user);
+  console.log(user);
+  console.log("User signed up successfully");
 };
 
 export const login = async (
@@ -53,22 +41,18 @@ export const login = async (
   rememberMe: boolean,
   setUser: (user: User) => void
 ) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const token = await userCredential.user.getIdToken();
-    if (rememberMe) {
-      await saveItem("authToken", token);
-      console.log("Token Saved Successfully");
-    }
-    setUser(userCredential.user);
-    console.log("User logged in successfully");
-  } catch (error) {
-    console.error("Error logging in: ", error);
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  const token = await userCredential.user.getIdToken();
+  if (rememberMe) {
+    await saveItem("authToken", token);
+    console.log("Token Saved Successfully");
   }
+  setUser(userCredential.user);
+  console.log("User logged in successfully");
 };
 
 export const initializeAuth = async (setUser: (user: User | null) => void) => {
@@ -103,6 +87,7 @@ export const logout = async (setUser: (user: User | null) => void) => {
     await auth.signOut();
     await removeItem("authToken");
     setUser(null);
+    router.replace("/signin");
     console.log("User logged out and token removed");
   } catch (error) {
     console.error("Error during logout:", error);
