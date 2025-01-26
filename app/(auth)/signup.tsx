@@ -141,7 +141,7 @@ const SignUp = () => {
                   onPress={handleSubmit}
                   containerStyles="mt-3"
                   textStyles="text-white"
-                  disabled={loading}
+                  isDisabled={loading}
                 />
               </>
             )}

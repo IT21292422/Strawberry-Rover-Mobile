@@ -6,7 +6,7 @@ interface Props {
   label: string;
   textStyles?: string;
   containerStyles?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 const CustomButton = ({
@@ -14,14 +14,14 @@ const CustomButton = ({
   label,
   textStyles,
   containerStyles,
-  disabled,
+  isDisabled,
 }: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
       className={`bg-primary rounded-xl min-h-[62px] justify-center items-center ${containerStyles}`}
-      disabled={disabled}
+      disabled={isDisabled}
     >
       <Text className={`font-semibold text-xl ${textStyles}`}>{label}</Text>
     </TouchableOpacity>
