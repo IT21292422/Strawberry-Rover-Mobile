@@ -7,6 +7,7 @@ import StatusCard from "@/components/StatusCard";
 
 const Home = () => {
   const [status, setStatus] = useState(false);
+
   return (
     <ScreenWrapper>
       <View className="mb-6">

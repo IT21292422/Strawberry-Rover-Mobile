@@ -5,17 +5,21 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 interface CustomInputFieldProps {
   value: string;
   type?: string;
+  error?: string;
   placeholder: string;
   handleChangeText: (text: string) => void;
   containerStyles?: string;
+  onBlur?: (e: any) => void;
 }
 
 const CustomInputField: React.FC<CustomInputFieldProps> = ({
   value,
   type = "text",
+  error,
   placeholder,
   handleChangeText,
   containerStyles,
+  onBlur,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -34,7 +38,10 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
           onChangeText={handleChangeText}
           secureTextEntry={type === "password" && !showPassword}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={(e) => {
+            setIsFocused(false);
+            onBlur && onBlur(e);
+          }}
         />
         {type === "password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
@@ -46,6 +53,7 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
           </TouchableOpacity>
         )}
       </View>
+      <Text className="text-lg pl-3 text-red-500">{error}</Text>
     </View>
   );
 };
