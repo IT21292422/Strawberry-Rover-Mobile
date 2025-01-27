@@ -40,6 +40,7 @@ const Analytics = () => {
   return (
     <ScreenWrapper>
       <ScrollView>
+        <Text className="text-2xl font-bold text-center">Test Rover</Text>
         <CustomInputField
           placeholder="Rover ID"
           value={roverId}

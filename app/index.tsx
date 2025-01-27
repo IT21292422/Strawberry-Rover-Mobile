@@ -8,7 +8,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 
 const App = () => {
-  console.log("Test");
   return (
     <ImageBackground
       source={Images.onboardingBackground}
