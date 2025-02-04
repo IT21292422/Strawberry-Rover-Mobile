@@ -38,3 +38,20 @@ export const useUpdateRover = () => {
     mutationFn: (payload: UpdateRoverPayloadType) => updateRover(payload),
   });
 };
+
+export const useGetRoverImageData = (roverId: number) => {
+  return useQuery({
+    queryKey: ["get-rover-image-data"],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.EXPO_PUBLIC_IMAGE_SERVICE}/rovers/flower-images/${roverId}`
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error getting rover image data", error);
+        throw error;
+      }
+    },
+  });
+};
