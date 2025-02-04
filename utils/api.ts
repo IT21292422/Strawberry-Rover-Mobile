@@ -14,9 +14,17 @@ const getCurrentOperationStatus = async (roverId: string) => {
   }
 };
 
-export const useGetCurrentOperationStatus = (roverId: string) => {
+export const useGetCurrentOperationStatus = (
+  roverId: string,
+  onSuccess?: (data: any) => void
+) => {
   return useMutation({
     mutationFn: () => getCurrentOperationStatus(roverId),
+    onSuccess: (data) => {
+      if (onSuccess) {
+        onSuccess(data);
+      }
+    },
   });
 };
 
@@ -33,9 +41,14 @@ const updateRover = async (payload: UpdateRoverPayloadType) => {
   }
 };
 
-export const useUpdateRover = () => {
+export const useUpdateRover = (
+  onSuccess?: () => void,
+  onError?: () => void
+) => {
   return useMutation({
     mutationFn: (payload: UpdateRoverPayloadType) => updateRover(payload),
+    onSuccess,
+    onError,
   });
 };
 

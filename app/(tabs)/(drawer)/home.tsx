@@ -1,15 +1,66 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons as Icon } from "@expo/vector-icons";
 import StatusCard from "@/components/StatusCard";
-import { useGetRoverImageData } from "@/utils/api";
+import {
+  useGetCurrentOperationStatus,
+  useGetRoverImageData,
+  useUpdateRover,
+} from "@/utils/api";
+import { RoverStatus } from "@/utils/types/Types";
 
 const Home = () => {
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState();
 
   const { data: roverData } = useGetRoverImageData(1);
+
+  const handleStatusSuccess = (data: any) => {
+    setStatus(data[0]?.roverStatus);
+  };
+
+  const { mutate: getOperationStatus } = useGetCurrentOperationStatus(
+    "1",
+    handleStatusSuccess
+  );
+
+  useEffect(() => {
+    getOperationStatus();
+  }, []);
+
+  const handleSuccess = () => {
+    getOperationStatus();
+    Alert.alert("Success", "Rover Status Updated Successfully");
+  };
+
+  const handleError = () => {
+    Alert.alert(
+      "Error Updating Rover Status",
+      updateRoverError ? updateRoverError.toString() : "Unknown error"
+    );
+  };
+
+  const {
+    mutate: updateRover,
+    isPending: updateRoverPending,
+    error: updateRoverError,
+  } = useUpdateRover(handleSuccess, handleError);
+
+  const handleUpdateRoverStatus = (roverStatus: number) => {
+    const payload = {
+      initialId: 1,
+      roverStatus: roverStatus,
+      userId: 1,
+    };
+    updateRover(payload);
+  };
 
   const latestData = roverData
     ? [...roverData].sort(
@@ -17,6 +68,21 @@ const Home = () => {
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       )[0]
     : null;
+
+  const selectRoverStatus = (status: number) => {
+    switch (status) {
+      case RoverStatus.START:
+        return "Running";
+      case RoverStatus.STOP:
+        return "Stopped";
+      case RoverStatus.PAUSE:
+        return "Paused";
+      case RoverStatus.SERVICE:
+        return "Service Mode";
+      default:
+        return "";
+    }
+  };
 
   return (
     <ScreenWrapper>
@@ -28,16 +94,7 @@ const Home = () => {
           Here are some of the latest updates on your farm.
         </Text>
       </View>
-      <View className="flex 1 justify-center items-center">
-        <TouchableOpacity onPress={() => setStatus(!status)}>
-          <Icon
-            name="power"
-            size={200}
-            color={status === false ? "red" : "green"}
-          />
-        </TouchableOpacity>
-      </View>
-      <View className="flex flex-row justify-center gap-5 mt-10">
+      <View className="flex flex-row justify-center gap-5 mt-5 mb-10">
         <StatusCard
           iconName="thermometer-outline"
           iconColor="red"
@@ -56,12 +113,65 @@ const Home = () => {
             value={latestData?.humidity}
           />
           <StatusCard
-            iconName="battery-full"
+            iconName={
+              latestData?.battery_status < 20 ? `battery-half` : `battery-full`
+            }
             iconColor="green"
             bgColor="bg-[#DEE4FE]"
             name="Battery Status"
             value={latestData?.battery_status}
           />
+        </View>
+      </View>
+      <View className="flex flex-row justify-around items-center border rounded-full p-1 bg-gray-100 border-gray-400">
+        <View className="flex flex-col gap-5 p-5 items-center">
+          <View className="bg-yellow-500 w-48 h-14 rounded-full flex flex-row justify-center items-center gap-4">
+            <View
+              className={`w-3 h-3 ${
+                status === RoverStatus.START ? "bg-green-500" : "bg-red-500"
+              } rounded-full animate-pulse`}
+            ></View>
+            {updateRoverPending ? (
+              <ActivityIndicator size="large" />
+            ) : (
+              <Text className="text-2xl text-white text-center">
+                {selectRoverStatus(status ?? 0)}
+              </Text>
+            )}
+          </View>
+          <View className="flex flex-row gap-5">
+            <View className="rounded-full p-3 bg-[#EDDCFC]">
+              <TouchableOpacity
+                onPress={() => handleUpdateRoverStatus(RoverStatus.SERVICE)}
+              >
+                <Icon name="build-outline" size={40} color="red" />
+              </TouchableOpacity>
+            </View>
+            <View className="rounded-full p-3 bg-[#EDDCFC]">
+              <TouchableOpacity
+                onPress={() => handleUpdateRoverStatus(RoverStatus.PAUSE)}
+              >
+                <Icon name="pause-outline" size={40} color="red" />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View className="rounded-full p-3 bg-[#FFCBD5]">
+          <TouchableOpacity
+            onPress={() => {
+              status === RoverStatus.START
+                ? handleUpdateRoverStatus(RoverStatus.STOP)
+                : handleUpdateRoverStatus(RoverStatus.START);
+            }}
+          >
+            <Icon
+              name={
+                status === RoverStatus.START ? `stop-outline` : `power-outline`
+              }
+              size={100}
+              color="red"
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <StatusBar style="light" />
