@@ -14,9 +14,17 @@ const getCurrentOperationStatus = async (roverId: string) => {
   }
 };
 
-export const useGetCurrentOperationStatus = (roverId: string) => {
+export const useGetCurrentOperationStatus = (
+  roverId: string,
+  onSuccess?: (data: any) => void
+) => {
   return useMutation({
     mutationFn: () => getCurrentOperationStatus(roverId),
+    onSuccess: (data) => {
+      if (onSuccess) {
+        onSuccess(data);
+      }
+    },
   });
 };
 
@@ -33,8 +41,30 @@ const updateRover = async (payload: UpdateRoverPayloadType) => {
   }
 };
 
-export const useUpdateRover = () => {
+export const useUpdateRover = (
+  onSuccess?: () => void,
+  onError?: () => void
+) => {
   return useMutation({
     mutationFn: (payload: UpdateRoverPayloadType) => updateRover(payload),
+    onSuccess,
+    onError,
+  });
+};
+
+export const useGetRoverImageData = (roverId: number) => {
+  return useQuery({
+    queryKey: ["get-rover-image-data"],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.EXPO_PUBLIC_IMAGE_SERVICE}/rovers/flower-images/${roverId}`
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error getting rover image data", error);
+        throw error;
+      }
+    },
   });
 };
