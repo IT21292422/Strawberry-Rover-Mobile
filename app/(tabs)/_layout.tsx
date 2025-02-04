@@ -6,7 +6,7 @@ const TabLayout = () => {
   return (
     <Tabs screenOptions={{ tabBarShowLabel: false }}>
       <Tabs.Screen
-        name="home"
+        name="(drawer)"
         options={{
           title: "Home",
           headerShown: false,
