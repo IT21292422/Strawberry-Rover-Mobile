@@ -6,7 +6,7 @@ const RoverMonitoring = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <WebView
-        source={{ uri: "https://strawberry-3-d-rover-model.vercel.app/" }}
+        source={{ uri: `${process.env.EXPO_PUBLIC_3D_MODEL_FRONTEND}` }}
         style={{ flex: 1 }}
       />
     </SafeAreaView>
