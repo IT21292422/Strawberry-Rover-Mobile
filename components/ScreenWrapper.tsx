@@ -3,9 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const ScreenWrapper = ({ children }: { children: any }) => {
   return (
-    <SafeAreaView className="flex-1 px-5 py-3 bg-white">
-      {children}
-    </SafeAreaView>
+    <SafeAreaView className="flex-1 px-5 bg-white">{children}</SafeAreaView>
   );
 };
 
