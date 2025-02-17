@@ -7,7 +7,6 @@ import {
   User,
 } from "firebase/auth";
 import { saveItem, removeItem, getItem } from "./SecureStoreUtils";
-import { Alert } from "react-native";
 import { router } from "expo-router";
 
 export const signUp = async (

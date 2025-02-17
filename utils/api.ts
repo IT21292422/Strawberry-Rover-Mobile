@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { UpdateRoverPayloadType } from "./types/Types";
+import { UpdateRoverPayloadType, userPayloadType } from "./types/Types";
 
 const getCurrentOperationStatus = async (roverId: string) => {
   try {
@@ -66,5 +66,26 @@ export const useGetRoverImageData = (roverId: number) => {
         throw error;
       }
     },
+  });
+};
+
+const createUser = async (payload: userPayloadType) => {
+  try {
+    const response = await axios.post(
+      `${process.env.EXPO_PUBLIC_IMAGE_SERVICE}/users/`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user ", error);
+    throw error;
+  }
+};
+
+export const useCreateUser = (onSuccess?: () => void, onError?: () => void) => {
+  return useMutation({
+    mutationFn: (payload: userPayloadType) => createUser(payload),
+    onSuccess,
+    onError,
   });
 };
