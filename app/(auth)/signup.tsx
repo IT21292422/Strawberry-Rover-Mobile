@@ -10,6 +10,7 @@ import { signUp } from "@/utils/AuthUtils";
 import useAuthStore from "@/store/AuthStore";
 import { Checkbox } from "react-native-paper";
 import { SignUpSchema } from "@/utils/Validations/SignUpValidation";
+import { useCreateUser } from "@/utils/api";
 
 interface FormValues {
   username: string;
@@ -20,6 +21,7 @@ interface FormValues {
 
 const SignUp = () => {
   const setUser = useAuthStore((state) => state.setUser);
+  const { mutate: createUser } = useCreateUser();
 
   const [checked, setChecked] = useState(false);
 
@@ -38,6 +40,10 @@ const SignUp = () => {
         checked,
         setUser
       );
+      createUser({
+        username: values.username,
+        email: values.email,
+      });
       router.replace("/home");
     } catch (error: any) {
       switch (error.code) {
