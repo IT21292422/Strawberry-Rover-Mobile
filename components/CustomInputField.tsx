@@ -7,9 +7,11 @@ interface CustomInputFieldProps {
   type?: string;
   error?: string;
   placeholder: string;
-  handleChangeText: (text: string) => void;
+  handleChangeText?: (text: string) => void;
   containerStyles?: string;
   onBlur?: (e: any) => void;
+  borderStyles?: string;
+  editable?: boolean;
 }
 
 const CustomInputField: React.FC<CustomInputFieldProps> = ({
@@ -20,6 +22,8 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
   handleChangeText,
   containerStyles,
   onBlur,
+  borderStyles,
+  editable = true,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -27,7 +31,7 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
   return (
     <View className={`space-y-2 ${containerStyles}`}>
       <View
-        className={`flex-row bg-gray-100 w-full h-16 px-4 rounded-2xl justify-between items-center ${
+        className={`flex-row bg-gray-100 w-full h-16 px-4 rounded-2xl justify-between items-center ${borderStyles} ${
           isFocused ? "border-2 border-primary" : "border border-gray-100"
         }`}
       >
@@ -42,6 +46,7 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
             setIsFocused(false);
             onBlur && onBlur(e);
           }}
+          editable={editable}
         />
         {type === "password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>

@@ -78,7 +78,7 @@ const Home = () => {
       case RoverStatus.PAUSE:
         return "Paused";
       case RoverStatus.SERVICE:
-        return "Service Mode";
+        return "Service";
       default:
         return "";
     }
