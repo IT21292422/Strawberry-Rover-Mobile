@@ -10,3 +10,15 @@ export enum RoverStatus {
   PAUSE = 2,
   SERVICE = 3,
 }
+
+interface Rover {
+  roverId: number;
+  nickname: string;
+}
+
+export interface userPayloadType {
+  username: string;
+  email: string;
+  userId?: number;
+  rovers?: Rover[];
+}
