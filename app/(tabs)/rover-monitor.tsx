@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const RoverMonitoring = () => {
   const webViewRef = useRef<WebView>(null);
   const token = "jwt-token-akmal";
-  const roverId = "12345";
+  const roverId = "1";
 
   // Function to send data to WebView after it loads
   const sendDataToWebView = () => {
