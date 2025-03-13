@@ -104,24 +104,13 @@ const Home = () => {
           isTemperature
           containerStyles="items-center"
         />
-        <View className="flex flex-col gap-5">
-          <StatusCard
-            iconName="water"
-            iconColor="blue"
-            bgColor="bg-[#EDDCFC]"
-            name="Humidity"
-            value={latestData?.humidity}
-          />
-          <StatusCard
-            iconName={
-              latestData?.battery_status < 20 ? `battery-half` : `battery-full`
-            }
-            iconColor="green"
-            bgColor="bg-[#DEE4FE]"
-            name="Battery Status"
-            value={latestData?.battery_status}
-          />
-        </View>
+        <StatusCard
+          iconName="water"
+          iconColor="blue"
+          bgColor="bg-[#EDDCFC]"
+          name="Humidity"
+          value={latestData?.humidity}
+        />
       </View>
       <View className="flex flex-row justify-around items-center border rounded-full p-1 bg-gray-100 border-gray-400">
         <View className="flex flex-col gap-5 p-5 items-center">
