@@ -11,7 +11,7 @@ export enum RoverStatus {
   SERVICE = 3,
 }
 
-interface Rover {
+export interface Rover {
   roverId: number;
   nickname: string;
 }

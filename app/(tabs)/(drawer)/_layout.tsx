@@ -20,6 +20,13 @@ const DrawerLayout = () => {
           }}
         />
         <Drawer.Screen
+          name="pollination-timeline"
+          options={{
+            drawerLabel: "Pollination Timeline",
+            title: "Pollination Timeline",
+          }}
+        />
+        <Drawer.Screen
           name="harvest"
           options={{
             drawerLabel: "Harvest",

@@ -3,9 +3,11 @@ import { useGetRoverImageData } from "@/utils/api";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Image } from "expo-image";
+import useRoverStore from "@/store/RoverStore";
 
 const Images = () => {
-  const { data: roverData } = useGetRoverImageData(1);
+  const currentRoverId = useRoverStore((state) => state.currentRoverId);
+  const { data: roverData } = useGetRoverImageData(currentRoverId);
   const sortedDataByLatest = roverData
     ? [...roverData].sort(
         (a, b) =>
@@ -26,6 +28,12 @@ const Images = () => {
             />
             <Text className="text-center mt-2 text-gray-600">
               Captured: {new Date(item.created_at).toLocaleString()}
+            </Text>
+            <Text className="text-center mt-2 text-gray-600">
+              Temperature: {item.temp}°C
+            </Text>
+            <Text className="text-center mt-2 text-gray-600">
+              Humidity: {item.humidity}%
             </Text>
           </View>
         )}

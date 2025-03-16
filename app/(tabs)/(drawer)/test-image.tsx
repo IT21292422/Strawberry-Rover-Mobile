@@ -3,9 +3,15 @@ import React, { useEffect } from "react";
 import { useGetCurrentStatus } from "@/utils/api";
 import CustomButton from "@/components/CustomButton";
 import { ActivityIndicator } from "react-native-paper";
+import useRoverStore from "@/store/RoverStore";
 
 const TestImage = () => {
-  const { data: currentStatus, mutate, isPending } = useGetCurrentStatus("1");
+  const currentRoverId = useRoverStore((state) => state.currentRoverId);
+  const {
+    data: currentStatus,
+    mutate,
+    isPending,
+  } = useGetCurrentStatus(currentRoverId);
 
   useEffect(() => {
     mutate();
