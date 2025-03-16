@@ -22,3 +22,14 @@ export interface userPayloadType {
   userId?: number;
   rovers?: Rover[];
 }
+
+export interface RoverImageData {
+  id: number;
+  rover_id: number;
+  random_id: number;
+  temp: number;
+  humidity: number;
+  blob_url: string;
+  image_data: string[];
+  created_at: string;
+}
