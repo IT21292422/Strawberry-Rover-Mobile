@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 import { WebView } from "react-native-webview";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useRoverStore from "@/store/RoverStore";
 
 const RoverMonitoring = () => {
+  const currentRoverId = useRoverStore((state) => state.currentRoverId);
+
   const webViewRef = useRef<WebView>(null);
   const token = "jwt-token-akmal";
-  const roverId = "1";
+  const roverId = currentRoverId;
 
   // Function to send data to WebView after it loads
   const sendDataToWebView = () => {

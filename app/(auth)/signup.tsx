@@ -67,7 +67,7 @@ const SignUp = () => {
     >
       <SafeAreaView className="flex-1 justify-center">
         <Text className="font-bold text-4xl text-white px-5">Sign Up</Text>
-        <View className="w-full h-[75%] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
+        <View className="w-full h-[620px] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
           <Text className="text-2xl font-bold mt-10">
             Create A Free Account
           </Text>

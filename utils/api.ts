@@ -8,6 +8,7 @@ const getCurrentOperationStatus = async (
   roverId: string
 ) => {
   try {
+    console.log("roverBackendUrl", roverBackendUrl);
     const response = await axios.post(`${roverBackendUrl}/rover/${roverId}`);
     return response.data;
   } catch (error) {
@@ -36,6 +37,7 @@ const updateRover = async (
   payload: UpdateRoverPayloadType
 ) => {
   try {
+    console.log("roverBackendUrl", roverBackendUrl);
     const response = await axios.post(
       `${roverBackendUrl}/rover/update`,
       payload
@@ -60,7 +62,7 @@ export const useUpdateRover = (
   });
 };
 
-export const useGetRoverImageData = (roverId: number) => {
+export const useGetRoverImageData = (roverId: string) => {
   const imageServiceUrl = useBackendUrlStore((state) => state.imageServiceUrl);
   return useQuery({
     queryKey: ["get-rover-image-data"],
@@ -117,5 +119,51 @@ export const useGetCurrentStatus = (roverId: string) => {
   const roverBackendUrl = useBackendUrlStore((state) => state.roverBackendUrl);
   return useMutation({
     mutationFn: () => getCurrentStatus(roverBackendUrl, roverId),
+  });
+};
+
+export const useGetFlowerCount = (
+  userId: number,
+  startDate: string,
+  endDate: string
+) => {
+  const imageServiceUrl = useBackendUrlStore((state) => state.imageServiceUrl);
+  return useQuery({
+    queryKey: ["get-flower-count"],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${imageServiceUrl}/users/${userId}/get-flower-count`,
+          {
+            params: {
+              start_date: startDate,
+              end_date: endDate,
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error getting pollinated flower count", error);
+        throw error;
+      }
+    },
+  });
+};
+
+export const useGetUser = (email: string) => {
+  const imageServiceUrl = useBackendUrlStore((state) => state.imageServiceUrl);
+  return useQuery({
+    queryKey: ["user", email],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${imageServiceUrl}/users/email/${email}`
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error getting user info", error);
+        throw error;
+      }
+    },
   });
 };
