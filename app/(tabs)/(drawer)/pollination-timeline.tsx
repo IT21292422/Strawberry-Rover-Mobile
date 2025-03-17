@@ -52,13 +52,21 @@ const PollinationTimeline = () => {
     }
   );
 
+  const pollination = [
+    { date: "Friday, March 14, 2025", duration: "1h 30m" },
+    { date: "Tuesday, March 11, 2025", duration: "2h 30m" },
+    { date: "Monday, March 10, 2025", duration: "3h 30m" },
+  ];
+
   return (
     <View style={{ padding: 20 }}>
       <FlatList
-        data={pollinationDays}
+        data={pollination}
         keyExtractor={(item) => item.date}
         renderItem={({ item }) => (
-          <TimelineCard date={item.date} duration={item.duration} />
+          <View className="my-4">
+            <TimelineCard date={item.date} duration={item.duration} />
+          </View>
         )}
       />
     </View>

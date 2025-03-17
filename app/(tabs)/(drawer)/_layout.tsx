@@ -1,5 +1,6 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
+import { Ionicons } from "@expo/vector-icons";
 
 const DrawerLayout = () => {
   return (
@@ -10,6 +11,9 @@ const DrawerLayout = () => {
           options={{
             drawerLabel: "Home",
             title: "",
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="home" color={color} size={size} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -17,6 +21,9 @@ const DrawerLayout = () => {
           options={{
             drawerLabel: "Images",
             title: "Images",
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="camera" color={color} size={size} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -24,34 +31,9 @@ const DrawerLayout = () => {
           options={{
             drawerLabel: "Pollination Timeline",
             title: "Pollination Timeline",
-          }}
-        />
-        <Drawer.Screen
-          name="harvest"
-          options={{
-            drawerLabel: "Harvest",
-            title: "Harvest",
-          }}
-        />
-        <Drawer.Screen
-          name="test-image"
-          options={{
-            drawerLabel: "Test Image",
-            title: "Test Image",
-          }}
-        />
-        <Drawer.Screen
-          name="test-flower-detect"
-          options={{
-            drawerLabel: "Test Flower Detect",
-            title: "Test Flower Detection",
-          }}
-        />
-        <Drawer.Screen
-          name="test-rover"
-          options={{
-            drawerLabel: "Test Rover",
-            title: "Test Rover",
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="layers" color={color} size={size} />
+            ),
           }}
         />
       </Drawer>

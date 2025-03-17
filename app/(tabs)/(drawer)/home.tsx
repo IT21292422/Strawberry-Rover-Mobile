@@ -20,6 +20,7 @@ import { RoverStatus } from "@/utils/types/Types";
 import useAuthStore from "@/store/AuthStore";
 import useRoverStore from "@/store/RoverStore";
 import { useShallow } from "zustand/react/shallow";
+import TodayPollinatedCard from "@/components/TodayPollinatedCard";
 
 const Home = () => {
   const [status, setStatus] = useState();
@@ -127,7 +128,7 @@ const Home = () => {
           Here are some of the latest updates on your farm.
         </Text>
       </View>
-      <View className="flex flex-row justify-center gap-5 mt-5 mb-10">
+      <View className="flex flex-row gap-5 mt-5 justify-center">
         <StatusCard
           iconName="thermometer-outline"
           iconColor="red"
@@ -135,7 +136,6 @@ const Home = () => {
           name="Temperature"
           value={latestData?.temp}
           isTemperature
-          containerStyles="items-center"
         />
         <StatusCard
           iconName="water"
@@ -144,6 +144,9 @@ const Home = () => {
           name="Humidity"
           value={latestData?.humidity}
         />
+      </View>
+      <View className="my-10">
+        <TodayPollinatedCard flowerCount={10} />
       </View>
       <View className="flex flex-row justify-around items-center border rounded-full p-1 bg-gray-100 border-gray-400">
         <View className="flex flex-col gap-5 p-5 items-center">

@@ -52,7 +52,7 @@ const SignIn = () => {
     >
       <SafeAreaView className="flex-1 justify-center">
         <Text className="font-bold text-4xl text-white px-5">Sign In</Text>
-        <View className="w-full h-[55%] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
+        <View className="w-full h-[450px] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
           <Text className="text-2xl font-bold mt-10">Welcome Back!</Text>
           <Formik
             initialValues={{
