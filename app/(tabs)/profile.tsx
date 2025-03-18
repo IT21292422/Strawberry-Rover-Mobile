@@ -9,9 +9,12 @@ import useBackendUrlStore from "@/store/BackendUrlStore";
 import { useShallow } from "zustand/react/shallow";
 import { Ionicons } from "@expo/vector-icons";
 import ScreenWrapper from "@/components/ScreenWrapper";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Profile = () => {
   const setUser = useAuthStore((state) => state.setUser);
+
+  const queryClient = useQueryClient();
 
   const {
     roverBackendUrl,
@@ -38,6 +41,7 @@ const Profile = () => {
   const handleRoverBackendUrlChange = () => {
     if (isEditingRoverUrl) {
       setRoverBackendUrl(newRoverBackendUrl);
+      queryClient.invalidateQueries({ queryKey: ["rover-operation-status"] });
       Alert.alert("Success", "Rover Backend Url updated successfully");
     }
     setIsEditingRoverUrl(!isEditingRoverUrl);
@@ -46,6 +50,7 @@ const Profile = () => {
   const handleImageServiceUrlChange = () => {
     if (isEditingImageUrl) {
       setImageServiceUrl(newImageServiceUrl);
+      queryClient.invalidateQueries({ queryKey: ["get-rover-image-data"] });
       Alert.alert("Success", "Image Service Url updated successfully");
     }
     setIsEditingImageUrl(!isEditingImageUrl);
