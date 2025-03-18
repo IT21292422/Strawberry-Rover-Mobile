@@ -20,7 +20,7 @@ const CustomButton = ({
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      className={`bg-primary rounded-xl min-h-[56px] justify-center items-center ${containerStyles}`}
+      className={`bg-primary rounded-xl min-h-[60px] justify-center items-center ${containerStyles}`}
       disabled={isDisabled}
     >
       <Text className={`font-semibold text-xl ${textStyles}`}>{label}</Text>
