@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { UpdateRoverPayloadType, userPayloadType } from "./types/Types";
 import useBackendUrlStore from "@/store/BackendUrlStore";
@@ -8,7 +8,6 @@ const getCurrentOperationStatus = async (
   roverId: string
 ) => {
   try {
-    console.log("roverBackendUrl", roverBackendUrl);
     const response = await axios.post(`${roverBackendUrl}/rover/${roverId}`);
     return response.data;
   } catch (error) {
@@ -17,18 +16,11 @@ const getCurrentOperationStatus = async (
   }
 };
 
-export const useGetCurrentOperationStatus = (
-  roverId: string,
-  onSuccess?: (data: any) => void
-) => {
+export const useGetCurrentOperationStatus = (roverId: string) => {
   const roverBackendUrl = useBackendUrlStore((state) => state.roverBackendUrl);
-  return useMutation({
-    mutationFn: () => getCurrentOperationStatus(roverBackendUrl, roverId),
-    onSuccess: (data) => {
-      if (onSuccess) {
-        onSuccess(data);
-      }
-    },
+  return useQuery({
+    queryKey: ["rover-operation-status", roverId],
+    queryFn: () => getCurrentOperationStatus(roverBackendUrl, roverId),
   });
 };
 
@@ -37,7 +29,6 @@ const updateRover = async (
   payload: UpdateRoverPayloadType
 ) => {
   try {
-    console.log("roverBackendUrl", roverBackendUrl);
     const response = await axios.post(
       `${roverBackendUrl}/rover/update`,
       payload
@@ -50,14 +41,21 @@ const updateRover = async (
 };
 
 export const useUpdateRover = (
-  onSuccess?: () => void,
-  onError?: () => void
+  roverId: string,
+  onSuccess: () => void,
+  onError: () => void
 ) => {
+  const queryClient = useQueryClient();
   const roverBackendUrl = useBackendUrlStore((state) => state.roverBackendUrl);
   return useMutation({
     mutationFn: (payload: UpdateRoverPayloadType) =>
       updateRover(roverBackendUrl, payload),
-    onSuccess,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["rover-operation-status", roverId],
+      });
+      onSuccess();
+    },
     onError,
   });
 };
@@ -110,7 +108,7 @@ const getCurrentStatus = async (roverBackendUrl: string, roverId: string) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error getting current rover operation status", error);
+    console.error("Error getting current rover status", error);
     throw error;
   }
 };

@@ -11,8 +11,8 @@ interface RoverStoreType {
 }
 
 const useRoverStore = create<RoverStoreType>((set) => ({
-  userId: 0,
-  currentRoverId: "",
+  userId: 1,
+  currentRoverId: "1",
   rovers: [],
   setCurrentRoverId: (roverId: string) => set({ currentRoverId: roverId }),
   setUserId: (userId: number) => set({ userId: userId }),
