@@ -25,9 +25,9 @@ const StatusCard: React.FC<StatusCardProps> = ({
 }) => {
   return (
     <View
-      className={`flex flex-row ${bgColor} justify-center px-4 py-6 gap-4 rounded-3xl w-60 h-40 ${containerStyles}`}
+      className={`flex flex-row ${bgColor} justify-start py-6 rounded-3xl w-52 h-40 ${containerStyles}`}
     >
-      <View className="flex justify-center items-center w-14">
+      <View className="flex justify-center items-center">
         <Icon name={iconName} size={48} color={iconColor} />
       </View>
       <View className="flex flex-col justify-center">

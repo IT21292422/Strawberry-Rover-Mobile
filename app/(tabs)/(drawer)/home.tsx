@@ -56,21 +56,16 @@ const Home = () => {
 
   const { data: roverData } = useGetRoverImageData(currentRoverId);
 
-  const handleStatusSuccess = (data: any) => {
-    setStatus(data[0]?.roverStatus);
-  };
-
-  const { mutate: getOperationStatus } = useGetCurrentOperationStatus(
-    currentRoverId,
-    handleStatusSuccess
-  );
+  const { data: operationStatus } =
+    useGetCurrentOperationStatus(currentRoverId);
 
   useEffect(() => {
-    getOperationStatus();
-  }, []);
+    if (operationStatus) {
+      setStatus(operationStatus[0]?.roverStatus);
+    }
+  }, [operationStatus]);
 
   const handleSuccess = () => {
-    getOperationStatus();
     Alert.alert("Success", "Rover Status Updated Successfully");
   };
 
@@ -85,7 +80,7 @@ const Home = () => {
     mutate: updateRover,
     isPending: updateRoverPending,
     error: updateRoverError,
-  } = useUpdateRover(handleSuccess, handleError);
+  } = useUpdateRover(currentRoverId, handleSuccess, handleError);
 
   const handleUpdateRoverStatus = (roverStatus: number) => {
     const payload = {

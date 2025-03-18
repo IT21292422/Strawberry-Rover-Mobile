@@ -39,7 +39,7 @@ const PollinationTimeline = () => {
       }
 
       const formattedDate = DateTime.fromISO(date).toLocaleString(
-        DateTime.DATE_HUGE
+        DateTime.DATE_MED_WITH_WEEKDAY
       );
 
       const duration = Duration.fromMillis(totalDuration);
@@ -53,9 +53,9 @@ const PollinationTimeline = () => {
   );
 
   const pollination = [
-    { date: "Friday, March 14, 2025", duration: "1h 30m" },
-    { date: "Tuesday, March 11, 2025", duration: "2h 30m" },
-    { date: "Monday, March 10, 2025", duration: "3h 30m" },
+    { date: "Fri, 14 Mar 2025", duration: "1h 30m" },
+    { date: "Tue, 11 Mar 2025", duration: "2h 30m" },
+    { date: "Mon, 10 Mar 2025", duration: "3h 30m" },
   ];
 
   return (
