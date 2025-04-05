@@ -54,12 +54,12 @@ const Analytics = () => {
 
   // Process data for charts
   useEffect(() => {
-    if (!flowerData) return;
+    // if (!flowerData) return;
 
-    // Find data for current rover
-    const roverData =
-      flowerData.by_rover.find((r) => r.rover_id === currentRoverId) ||
-      flowerData.by_rover[0]; // Fallback to first rover if current not found
+    // // Find data for current rover
+    // const roverData =
+    //   flowerData.by_rover.find((r) => r.rover_id === currentRoverId) ||
+    //   flowerData.by_rover[0]; // Fallback to first rover if current not found
 
     const flowerCount = flowers;
 
@@ -121,7 +121,7 @@ const Analytics = () => {
       }
       setChartData(days);
     }
-  }, [flowerData, activeTab, weekStart, monthStart, currentRoverId]);
+  }, [activeTab, weekStart, monthStart, currentRoverId]);
 
   // Navigate to previous period
   const goToPrevious = () => {
@@ -157,12 +157,12 @@ const Analytics = () => {
 
   // Get rover name
   const getRoverName = () => {
-    if (!flowerData) return "Current Rover";
+    // if (!flowerData) return "Current Rover";
 
-    const rover = flowerData.by_rover.find(
-      (r) => r.rover_id === currentRoverId
-    );
-    return rover ? rover.rover_nickname : "Current Rover";
+    // const rover = flowerData.by_rover.find(
+    //   (r) => r.rover_id === currentRoverId
+    // );
+    return "Current Rover";
   };
 
   return (
@@ -194,19 +194,19 @@ const Analytics = () => {
         </View>
 
         {/* Total count display */}
-        {flowerData && (
-          <View className="bg-blue-50 p-4 rounded-lg mb-4">
-            <Text className="text-lg font-semibold text-center">
-              Flowers Pollinated by {getRoverName()}
-            </Text>
-            <Text className="text-3xl font-bold text-center text-blue-600">
-              {flowers}
-            </Text>
-            <Text className="text-sm text-center text-gray-500">
-              {start.toFormat("MMM d")} - {end.toFormat("MMM d, yyyy")}
-            </Text>
-          </View>
-        )}
+        {/* {flowerData && ( */}
+        <View className="bg-blue-50 p-4 rounded-lg mb-4">
+          <Text className="text-lg font-semibold text-center">
+            Flowers Pollinated by {getRoverName()}
+          </Text>
+          <Text className="text-3xl font-bold text-center text-blue-600">
+            {flowers}
+          </Text>
+          <Text className="text-sm text-center text-gray-500">
+            {start.toFormat("MMM d")} - {end.toFormat("MMM d, yyyy")}
+          </Text>
+        </View>
+        {/* )} */}
 
         {/* Period navigation and chart */}
         <View className="mb-6">
@@ -235,13 +235,7 @@ const Analytics = () => {
             </TouchableOpacity>
           </View>
 
-          {isLoading ? (
-            <Text className="text-center p-4">Loading data...</Text>
-          ) : error ? (
-            <Text className="text-center text-red-500 p-4">
-              Error loading data
-            </Text>
-          ) : (
+          {
             <View className="bg-white p-4 rounded-lg">
               {chartData.length > 0 ? (
                 activeTab === "weekly" ? (
@@ -286,40 +280,40 @@ const Analytics = () => {
                 <Text className="text-center p-4">No data available</Text>
               )}
             </View>
-          )}
+          }
         </View>
 
         {/* Additional stats */}
-        {flowerData && (
-          <View className="mb-6 bg-white p-4 rounded-lg">
-            <Text className="text-xl font-bold text-center mb-4">
-              Stats for {getRoverName()}
-            </Text>
+        {/* {flowerData && ( */}
+        <View className="mb-6 bg-white p-4 rounded-lg">
+          <Text className="text-xl font-bold text-center mb-4">
+            Stats for {getRoverName()}
+          </Text>
 
-            <View className="flex-row justify-between mb-2">
-              <Text className="text-gray-600">Total Flowers:</Text>
-              <Text className="font-bold">{flowers}</Text>
-            </View>
-
-            <View className="flex-row justify-between mb-2">
-              <Text className="text-gray-600">Avg. Per Day:</Text>
-              <Text className="font-bold">
-                {activeTab === "weekly"
-                  ? Math.round(flowers / 7)
-                  : Math.round(flowers / monthStart.daysInMonth)}
-              </Text>
-            </View>
-
-            <View className="flex-row justify-between">
-              <Text className="text-gray-600">% of Total:</Text>
-              <Text className="font-bold">
-                {flowerData.net_count > 0
-                  ? ((flowers / flowerData.net_count) * 100).toFixed(1) + "%"
-                  : "0%"}
-              </Text>
-            </View>
+          <View className="flex-row justify-between mb-2">
+            <Text className="text-gray-600">Total Flowers:</Text>
+            <Text className="font-bold">{flowers}</Text>
           </View>
-        )}
+
+          <View className="flex-row justify-between mb-2">
+            <Text className="text-gray-600">Avg. Per Day:</Text>
+            <Text className="font-bold">
+              {activeTab === "weekly"
+                ? Math.round(flowers / 7)
+                : Math.round(flowers / monthStart.daysInMonth)}
+            </Text>
+          </View>
+
+          <View className="flex-row justify-between">
+            <Text className="text-gray-600">% of Total:</Text>
+            <Text className="font-bold">
+              {/* {flowerData.net_count > 0 */}
+              {((flowers / 30) * 100).toFixed(1) + "%"}
+              {/* : "0%"} */}
+            </Text>
+          </View>
+        </View>
+        {/* )} */}
       </ScrollView>
     </ScreenWrapper>
   );

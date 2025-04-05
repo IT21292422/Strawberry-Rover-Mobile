@@ -4,21 +4,22 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Image } from "expo-image";
 import useRoverStore from "@/store/RoverStore";
+import data from "@/constants/imageData.json";
 
 const Images = () => {
-  const currentRoverId = useRoverStore((state) => state.currentRoverId);
-  const { data: roverData } = useGetRoverImageData(currentRoverId);
-  const sortedDataByLatest = roverData
-    ? [...roverData].sort(
-        (a, b) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      )
-    : [];
+  // const currentRoverId = useRoverStore((state) => state.currentRoverId);
+  // const { data: roverData } = useGetRoverImageData(currentRoverId);
+  // const sortedDataByLatest = roverData
+  //   ? [...roverData].sort(
+  //       (a, b) =>
+  //         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  //     )
+  //   : [];
 
   return (
     <ScreenWrapper>
       <FlatList
-        data={sortedDataByLatest}
+        data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View className="p-5 mb-5 rounded-2xl">

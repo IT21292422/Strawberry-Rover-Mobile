@@ -129,7 +129,7 @@ const Home = () => {
           iconColor="red"
           bgColor="bg-[#FFCBD5]"
           name="Temperature"
-          value={latestData?.temp}
+          value={"25"}
           isTemperature
         />
         <StatusCard
@@ -137,7 +137,7 @@ const Home = () => {
           iconColor="blue"
           bgColor="bg-[#EDDCFC]"
           name="Humidity"
-          value={latestData?.humidity}
+          value={"30"}
         />
       </View>
       <View className="my-10">
