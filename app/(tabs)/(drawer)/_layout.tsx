@@ -27,6 +27,13 @@ const DrawerLayout = () => {
           }}
         />
         <Drawer.Screen
+          name="test-image"
+          options={{
+            drawerLabel: "Test Image",
+            title: "Test Image",
+          }}
+        />
+        <Drawer.Screen
           name="test-flower-detect"
           options={{
             drawerLabel: "Test Flower Detect",
