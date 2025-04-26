@@ -25,7 +25,8 @@ const StatusCard: React.FC<StatusCardProps> = ({
 }) => {
   return (
     <View
-      className={`flex flex-col ${bgColor} rounded-3xl w-48 p-5 justify-center items-start ${containerStyles}`}
+      testID="status-card"
+      className={`flex flex-row ${bgColor} justify-start py-6 rounded-3xl w-52 h-40 ${containerStyles}`}
     >
       <Icon name={iconName} size={48} color={iconColor} />
       <Text className="text-2xl">{name}</Text>
