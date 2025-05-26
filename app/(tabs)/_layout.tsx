@@ -1,14 +1,17 @@
 import React from "react";
 import { Tabs, Redirect } from "expo-router";
 import { Ionicons as Icon } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const TabLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <Tabs screenOptions={{ tabBarShowLabel: false }}>
       <Tabs.Screen
         name="(drawer)"
         options={{
-          title: "Home",
+          title: t("home"),
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <Icon
@@ -22,7 +25,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="rover-monitor"
         options={{
-          title: "Monitor",
+          title: t("roverMonitor"),
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <Icon
@@ -36,7 +39,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="analytics"
         options={{
-          title: "Analytics",
+          title: t("analytics"),
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <Icon
@@ -46,11 +49,11 @@ const TabLayout = () => {
             />
           ),
         }}
-      />
+      />{" "}
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
+          title: t("profile"),
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <Icon

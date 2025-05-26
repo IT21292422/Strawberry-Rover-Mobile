@@ -1,6 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Ionicons as Icon } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 interface CustomInputFieldProps {
   value: string;
@@ -12,6 +13,7 @@ interface CustomInputFieldProps {
   onBlur?: (e: any) => void;
   borderStyles?: string;
   editable?: boolean;
+  useTranslation?: boolean;
 }
 
 const CustomInputField: React.FC<CustomInputFieldProps> = ({
@@ -24,9 +26,13 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
   onBlur,
   borderStyles,
   editable = true,
+  useTranslation: shouldTranslate = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const { t } = useTranslation();
+
+  const placeholderText = shouldTranslate ? t(placeholder) : placeholder;
 
   return (
     <View className={`space-y-2 ${containerStyles}`}>
@@ -37,7 +43,7 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
       >
         <TextInput
           className="text-xl"
-          placeholder={placeholder}
+          placeholder={placeholderText}
           value={value}
           onChangeText={handleChangeText}
           secureTextEntry={type === "password" && !showPassword}

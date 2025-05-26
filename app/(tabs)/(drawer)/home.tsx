@@ -16,9 +16,12 @@ import {
   useUpdateRover,
 } from "@/utils/api";
 import { RoverStatus } from "@/utils/types/Types";
+import LanguageButton from "@/components/LanguageButton";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const [status, setStatus] = useState();
+  const { t } = useTranslation();
 
   const { data: roverData } = useGetRoverImageData(1);
 
@@ -83,16 +86,18 @@ const Home = () => {
         return "";
     }
   };
-
   return (
     <ScreenWrapper>
-      <View className="mb-6">
-        <Text className="text-gray-900 mb-3 font-bold text-4xl text-left">
-          Welcome Back
-        </Text>
-        <Text className="text-gray-500 text-xl font-medium">
-          Here are some of the latest updates on your farm.
-        </Text>
+      <View className="flex flex-row justify-between items-center mb-6">
+        <View className="flex-1">
+          <Text className="text-gray-900 mb-3 font-bold text-4xl text-left">
+            {t("welcome")}
+          </Text>
+          <Text className="text-gray-500 text-xl font-medium">
+            Here are some of the latest updates on your farm.
+          </Text>
+        </View>
+        <LanguageButton containerStyle="mr-2" />
       </View>
       <View className="flex flex-row justify-center gap-5 mt-5 mb-10">
         <StatusCard
@@ -122,7 +127,7 @@ const Home = () => {
             value={latestData?.battery_status}
           />
         </View>
-      </View>
+      </View>{" "}
       <View className="flex flex-row justify-around items-center border rounded-full p-1 bg-gray-100 border-gray-400">
         <View className="flex flex-col gap-5 p-5 items-center">
           <View className="bg-yellow-500 w-48 h-14 rounded-full flex flex-row justify-center items-center gap-4">

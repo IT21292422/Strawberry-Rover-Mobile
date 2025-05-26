@@ -1,29 +1,32 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
+import { useTranslation } from "react-i18next";
 
 const DrawerLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer>
         <Drawer.Screen
           name="home"
           options={{
-            drawerLabel: "Home",
+            drawerLabel: t("home"),
             title: "",
           }}
         />
         <Drawer.Screen
           name="images"
           options={{
-            drawerLabel: "Images",
-            title: "Images",
+            drawerLabel: t("images"),
+            title: t("images"),
           }}
-        />
+        />{" "}
         <Drawer.Screen
           name="harvest"
           options={{
-            drawerLabel: "Harvest",
-            title: "Harvest",
+            drawerLabel: t("harvest"),
+            title: t("harvest"),
           }}
         />
         <Drawer.Screen
