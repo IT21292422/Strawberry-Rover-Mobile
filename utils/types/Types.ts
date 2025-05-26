@@ -11,7 +11,7 @@ export enum RoverStatus {
   SERVICE = 3,
 }
 
-interface Rover {
+export interface Rover {
   roverId: number;
   nickname: string;
 }
@@ -21,4 +21,15 @@ export interface userPayloadType {
   email: string;
   userId?: number;
   rovers?: Rover[];
+}
+
+export interface RoverImageData {
+  id: number;
+  rover_id: number;
+  random_id: number;
+  temp: number;
+  humidity: number;
+  blob_url: string;
+  image_data: string[];
+  created_at: string;
 }

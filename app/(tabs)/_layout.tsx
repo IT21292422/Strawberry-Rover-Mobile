@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Redirect } from "expo-router";
+import { Tabs } from "expo-router";
 import { Ionicons as Icon } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +13,7 @@ const TabLayout = () => {
         options={{
           title: t("home"),
           headerShown: false,
+          href: "/(drawer)/home",
           tabBarIcon: ({ color, focused }) => (
             <Icon
               name={focused ? "home" : "home-outline"}

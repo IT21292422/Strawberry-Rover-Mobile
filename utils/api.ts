@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { UpdateRoverPayloadType, userPayloadType } from "./types/Types";
 import useBackendUrlStore from "@/store/BackendUrlStore";
@@ -16,18 +16,11 @@ const getCurrentOperationStatus = async (
   }
 };
 
-export const useGetCurrentOperationStatus = (
-  roverId: string,
-  onSuccess?: (data: any) => void
-) => {
+export const useGetCurrentOperationStatus = (roverId: string) => {
   const roverBackendUrl = useBackendUrlStore((state) => state.roverBackendUrl);
-  return useMutation({
-    mutationFn: () => getCurrentOperationStatus(roverBackendUrl, roverId),
-    onSuccess: (data) => {
-      if (onSuccess) {
-        onSuccess(data);
-      }
-    },
+  return useQuery({
+    queryKey: ["rover-operation-status", roverId],
+    queryFn: () => getCurrentOperationStatus(roverBackendUrl, roverId),
   });
 };
 
@@ -48,19 +41,26 @@ const updateRover = async (
 };
 
 export const useUpdateRover = (
-  onSuccess?: () => void,
-  onError?: () => void
+  roverId: string,
+  onSuccess: () => void,
+  onError: () => void
 ) => {
+  const queryClient = useQueryClient();
   const roverBackendUrl = useBackendUrlStore((state) => state.roverBackendUrl);
   return useMutation({
     mutationFn: (payload: UpdateRoverPayloadType) =>
       updateRover(roverBackendUrl, payload),
-    onSuccess,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["rover-operation-status", roverId],
+      });
+      onSuccess();
+    },
     onError,
   });
 };
 
-export const useGetRoverImageData = (roverId: number) => {
+export const useGetRoverImageData = (roverId: string) => {
   const imageServiceUrl = useBackendUrlStore((state) => state.imageServiceUrl);
   return useQuery({
     queryKey: ["get-rover-image-data"],
@@ -108,7 +108,7 @@ const getCurrentStatus = async (roverBackendUrl: string, roverId: string) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error getting current rover operation status", error);
+    console.error("Error getting current rover status", error);
     throw error;
   }
 };
@@ -117,5 +117,51 @@ export const useGetCurrentStatus = (roverId: string) => {
   const roverBackendUrl = useBackendUrlStore((state) => state.roverBackendUrl);
   return useMutation({
     mutationFn: () => getCurrentStatus(roverBackendUrl, roverId),
+  });
+};
+
+export const useGetFlowerCount = (
+  userId: number,
+  startDate: string,
+  endDate: string
+) => {
+  const imageServiceUrl = useBackendUrlStore((state) => state.imageServiceUrl);
+  return useQuery({
+    queryKey: ["get-flower-count"],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${imageServiceUrl}/users/${userId}/get-flower-count`,
+          {
+            params: {
+              start_date: startDate,
+              end_date: endDate,
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error getting pollinated flower count", error);
+        throw error;
+      }
+    },
+  });
+};
+
+export const useGetUser = (email: string) => {
+  const imageServiceUrl = useBackendUrlStore((state) => state.imageServiceUrl);
+  return useQuery({
+    queryKey: ["user", email],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${imageServiceUrl}/users/email/${email}`
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error getting user info", error);
+        throw error;
+      }
+    },
   });
 };
