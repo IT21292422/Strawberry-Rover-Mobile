@@ -62,8 +62,12 @@ const Profile = () => {
       <ScrollView>
         <View className="flex-col items-center justify-center  my-4">
           <Text className="text-2xl font-bold text-center">Profile</Text>
+          <View className="flex-row w-full justify-end items-center px-5 mb-2">
+            <LanguageSelector isCompact={true} />
+          </View>
           <Ionicons name="person-circle" size={100} />
         </View>
+
         <View className="w-full justify-center px-5">
           <View className="gap-2">
             <Text className="text-xl font-bold">Username</Text>

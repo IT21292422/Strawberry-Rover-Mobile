@@ -80,12 +80,12 @@ const SignUp = () => {
         keyboardShouldPersistTaps="handled"
       >
         <SafeAreaView className="flex-1 justify-center">
-          <View className="flex-row justify-end px-5 mb-2">
-            <LanguageSelector />
+          <View className="flex-row justify-between items-center px-5 mb-2">
+            <Text className="font-bold text-4xl text-white px-5">
+              {t("signup")}
+            </Text>
+            <LanguageSelector isCompact={true} />
           </View>
-          <Text className="font-bold text-4xl text-white px-5">
-            {t("signup")}
-          </Text>
           <View className="w-full h-[620px] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
             <Text className="text-2xl font-bold mt-10">
               {t("createFreeAccount")}
@@ -162,7 +162,7 @@ const SignUp = () => {
                       onPress={() => {
                         setChecked(!checked);
                       }}
-                    />{" "}
+                    />
                     <Text className="text-lg">{t("rememberMe")}</Text>
                   </View>
                   <CustomButton
