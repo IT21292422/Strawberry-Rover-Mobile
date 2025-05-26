@@ -28,19 +28,18 @@ const StatusCard: React.FC<StatusCardProps> = ({
       testID="status-card"
       className={`flex flex-row ${bgColor} justify-start py-6 rounded-3xl w-52 h-40 ${containerStyles}`}
     >
-      <Icon name={iconName} size={48} color={iconColor} />
-      <Text className="text-2xl">{name}</Text>
-      {isTemperature ? (
+      <View className="flex justify-center items-center">
+        <Icon name={iconName} size={48} color={iconColor} />
+      </View>
+      <View className="flex flex-col justify-center">
+        <Text className="text-2xl">{name}</Text>
         <Text className={`text-2xl font-bold ${textStyles}`}>
           {value}
-          <Text className="text-base font-semibold">°C</Text>
+          <Text className="text-base font-semibold">
+            {isTemperature ? "°C" : "%"}
+          </Text>
         </Text>
-      ) : (
-        <Text className={`text-2xl font-bold ${textStyles}`}>
-          {value}
-          <Text className="text-base font-semibold">%</Text>
-        </Text>
-      )}
+      </View>
     </View>
   );
 };

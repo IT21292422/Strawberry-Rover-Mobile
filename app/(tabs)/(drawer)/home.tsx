@@ -13,30 +13,59 @@ import StatusCard from "@/components/StatusCard";
 import {
   useGetCurrentOperationStatus,
   useGetRoverImageData,
+  useGetUser,
   useUpdateRover,
 } from "@/utils/api";
 import { RoverStatus } from "@/utils/types/Types";
+import useAuthStore from "@/store/AuthStore";
+import useRoverStore from "@/store/RoverStore";
+import { useShallow } from "zustand/react/shallow";
+import TodayPollinatedCard from "@/components/TodayPollinatedCard";
 
 const Home = () => {
   const [status, setStatus] = useState();
 
-  const { data: roverData } = useGetRoverImageData(1);
-
-  const handleStatusSuccess = (data: any) => {
-    setStatus(data[0]?.roverStatus);
-  };
-
-  const { mutate: getOperationStatus } = useGetCurrentOperationStatus(
-    "1",
-    handleStatusSuccess
+  const user = useAuthStore((state) => state.user);
+  const {
+    userId,
+    currentRoverId,
+    rovers,
+    setCurrentRoverId,
+    setUserId,
+    setRovers,
+  } = useRoverStore(
+    useShallow((state) => ({
+      userId: state.userId,
+      currentRoverId: state.currentRoverId,
+      rovers: state.rovers,
+      setCurrentRoverId: state.setCurrentRoverId,
+      setUserId: state.setUserId,
+      setRovers: state.setRovers,
+    }))
   );
 
+  const { data: userData } = useGetUser(user?.email as string);
+
   useEffect(() => {
-    getOperationStatus();
-  }, []);
+    if (userData) {
+      setUserId(userData.userId);
+      setRovers(userData.rovers);
+      setCurrentRoverId(userData.rovers[0].roverId.toString());
+    }
+  }, [userData]);
+
+  const { data: roverData } = useGetRoverImageData(currentRoverId);
+
+  const { data: operationStatus } =
+    useGetCurrentOperationStatus(currentRoverId);
+
+  useEffect(() => {
+    if (operationStatus) {
+      setStatus(operationStatus[0]?.roverStatus);
+    }
+  }, [operationStatus]);
 
   const handleSuccess = () => {
-    getOperationStatus();
     Alert.alert("Success", "Rover Status Updated Successfully");
   };
 
@@ -51,13 +80,13 @@ const Home = () => {
     mutate: updateRover,
     isPending: updateRoverPending,
     error: updateRoverError,
-  } = useUpdateRover(handleSuccess, handleError);
+  } = useUpdateRover(currentRoverId, handleSuccess, handleError);
 
   const handleUpdateRoverStatus = (roverStatus: number) => {
     const payload = {
       initialId: 1,
       roverStatus: roverStatus,
-      userId: 1,
+      userId: userId,
     };
     updateRover(payload);
   };
@@ -94,34 +123,25 @@ const Home = () => {
           Here are some of the latest updates on your farm.
         </Text>
       </View>
-      <View className="flex flex-row justify-center gap-5 mt-5 mb-10">
+      <View className="flex flex-row gap-5 mt-5 justify-center">
         <StatusCard
           iconName="thermometer-outline"
           iconColor="red"
           bgColor="bg-[#FFCBD5]"
           name="Temperature"
-          value={latestData?.temp}
+          value={"25"}
           isTemperature
-          containerStyles="items-center"
         />
-        <View className="flex flex-col gap-5">
-          <StatusCard
-            iconName="water"
-            iconColor="blue"
-            bgColor="bg-[#EDDCFC]"
-            name="Humidity"
-            value={latestData?.humidity}
-          />
-          <StatusCard
-            iconName={
-              latestData?.battery_status < 20 ? `battery-half` : `battery-full`
-            }
-            iconColor="green"
-            bgColor="bg-[#DEE4FE]"
-            name="Battery Status"
-            value={latestData?.battery_status}
-          />
-        </View>
+        <StatusCard
+          iconName="water"
+          iconColor="blue"
+          bgColor="bg-[#EDDCFC]"
+          name="Humidity"
+          value={"30"}
+        />
+      </View>
+      <View className="my-10">
+        <TodayPollinatedCard flowerCount={10} />
       </View>
       <View className="flex flex-row justify-around items-center border rounded-full p-1 bg-gray-100 border-gray-400">
         <View className="flex flex-col gap-5 p-5 items-center">
