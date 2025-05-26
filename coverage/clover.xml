@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1745652687988" clover="3.2.0">
+  <project timestamp="1745652687988" name="All files">
+    <metrics statements="18" coveredstatements="18" conditionals="14" coveredconditionals="14" methods="9" coveredmethods="9" elements="41" coveredelements="41" complexity="0" loc="18" ncloc="18" packages="1" files="6" classes="6"/>
+    <file name="CustomButton.tsx" path="D:\Y4\RP\Project\Strawberry-Rover-Mobile\components\CustomButton.tsx">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="19" count="4" type="stmt"/>
+    </file>
+    <file name="CustomInputField.tsx" path="D:\Y4\RP\Project\Strawberry-Rover-Mobile\components\CustomInputField.tsx">
+      <metrics statements="8" coveredstatements="8" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="28" count="11" type="stmt"/>
+      <line num="29" count="11" type="stmt"/>
+      <line num="31" count="11" type="stmt"/>
+      <line num="45" count="1" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+      <line num="48" count="1" type="cond" truecount="2" falsecount="0"/>
+      <line num="54" count="2" type="stmt"/>
+    </file>
+    <file name="ScreenWrapper.tsx" path="D:\Y4\RP\Project\Strawberry-Rover-Mobile\components\ScreenWrapper.tsx">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+    </file>
+    <file name="StatusCard.tsx" path="D:\Y4\RP\Project\Strawberry-Rover-Mobile\components\StatusCard.tsx">
+      <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="26" count="3" type="stmt"/>
+    </file>
+    <file name="TimelineCard.tsx" path="D:\Y4\RP\Project\Strawberry-Rover-Mobile\components\TimelineCard.tsx">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+    </file>
+    <file name="TodayPollinatedCard.tsx" path="D:\Y4\RP\Project\Strawberry-Rover-Mobile\components\TodayPollinatedCard.tsx">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="3" type="stmt"/>
+    </file>
+  </project>
+</coverage>

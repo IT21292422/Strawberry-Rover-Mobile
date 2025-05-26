@@ -31,6 +31,7 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
   return (
     <View className={`space-y-2 ${containerStyles}`}>
       <View
+        testID="input-container"
         className={`flex-row bg-gray-100 w-full h-16 px-4 rounded-2xl justify-between items-center ${borderStyles} ${
           isFocused ? "border-2 border-primary" : "border border-gray-100"
         }`}
@@ -49,7 +50,10 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
           editable={editable}
         />
         {type === "password" && (
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+            accessibilityRole="button"
+          >
             <Icon
               name={!showPassword ? "eye" : "eye-off"}
               size={24}
