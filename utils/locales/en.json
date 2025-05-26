@@ -7,11 +7,16 @@
 
   "signin": "Sign In",
   "signup": "Sign Up",
+  "signingUp": "Signing Up...",
   "email": "Email",
   "password": "Password",
   "confirmPassword": "Confirm Password",
   "forgotPassword": "Forgot Password",
   "username": "Username",
+  "rememberMe": "Remember Me",
+  "dontHaveAccount": "Don't have an account?",
+  "alreadyHaveAccount": "Already have an account?",
+  "createFreeAccount": "Create A Free Account",
 
   "submit": "Submit",
   "cancel": "Cancel",

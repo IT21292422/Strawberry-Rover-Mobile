@@ -7,11 +7,16 @@
 
   "signin": "Se connecter",
   "signup": "S'inscrire",
+  "signingUp": "Inscription en cours...",
   "email": "E-mail",
   "password": "Mot de passe",
   "confirmPassword": "Confirmer le mot de passe",
   "forgotPassword": "Mot de passe oublié",
   "username": "Nom d'utilisateur",
+  "rememberMe": "Se souvenir de moi",
+  "dontHaveAccount": "Vous n'avez pas de compte?",
+  "alreadyHaveAccount": "Vous avez déjà un compte?",
+  "createFreeAccount": "Créer un compte gratuit",
 
   "submit": "Soumettre",
   "cancel": "Annuler",

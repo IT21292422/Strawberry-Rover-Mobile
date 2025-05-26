@@ -88,7 +88,7 @@ const Profile = () => {
             containerStyles="p-5 h-[48px]"
           />
         </View>
-      </View>{" "}
+      </View>
       <View className="gap-2">
         <Text className="text-xl font-bold">Image Service Url</Text>
         <View className="flex-row w-full gap-2">

@@ -7,11 +7,16 @@
 
   "signin": "පිවිසෙන්න",
   "signup": "ලියාපදිංචි වන්න",
+  "signingUp": "ලියාපදිංචි වෙමින්...",
   "email": "විද්‍යුත් තැපෑල",
   "password": "මුරපදය",
   "confirmPassword": "මුරපදය තහවුරු කරන්න",
   "forgotPassword": "මුරපදය අමතක වුණාද?",
   "username": "පරිශීලක නාමය",
+  "rememberMe": "මාව මතක තබා ගන්න",
+  "dontHaveAccount": "ගිණුමක් නොමැතිද?",
+  "alreadyHaveAccount": "දැනටමත් ගිණුමක් තිබේද?",
+  "createFreeAccount": "නොමිලේ ගිණුමක් සාදන්න",
 
   "submit": "ඉදිරිපත් කරන්න",
   "cancel": "අවලංගු කරන්න",

@@ -53,7 +53,6 @@ const SignIn = () => {
       resizeMode="cover"
       className="flex-1"
     >
-      {" "}
       <SafeAreaView className="flex-1 justify-center">
         <View className="flex-row justify-end px-5 mb-2">
           <LanguageSelector />
@@ -105,8 +104,8 @@ const SignIn = () => {
                   <Checkbox
                     status={checked ? "checked" : "unchecked"}
                     onPress={() => setChecked(!checked)}
-                  />{" "}
-                  <Text className="text-lg">Remember Me</Text>
+                  />
+                  <Text className="text-lg">{t("rememberMe")}</Text>
                 </View>
                 <CustomButton
                   label={loading ? t("loading") : t("signin")}
@@ -119,7 +118,7 @@ const SignIn = () => {
             )}
           </Formik>
           <View className="justify-center pt-5 flex-row gap-2 items-center">
-            <Text className="text-lg">Don't have an account?</Text>
+            <Text className="text-lg">{t("dontHaveAccount")}</Text>
             <Link
               href="/signup"
               className="text-lg font-semibold text-secondary"

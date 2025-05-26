@@ -62,6 +62,7 @@ const TestRover = () => {
             currentOperationStatus && (
               <>
                 <Text className="p-1 text-lg text-start">
+                  {" "}
                   <Text className="font-bold">Rover ID:</Text>{" "}
                   {currentOperationStatus[0]?.roverId}
                   {"\n"}
@@ -70,8 +71,7 @@ const TestRover = () => {
                   {"\n"}
                   <Text className="font-bold">Rover Status: </Text>
                   {currentOperationStatus[0]?.roverStatus}
-                  {"\n"}
-                  <Text className="font-bold">Created At:</Text>{" "}
+                  {"\n"} <Text className="font-bold">Created At:</Text>{" "}
                   {currentOperationStatus[0]?.createdAt}
                 </Text>
               </>
@@ -137,6 +137,7 @@ const TestRover = () => {
             currentOperationStatus && (
               <>
                 <Text className="p-1 text-lg text-start">
+                  {" "}
                   <Text className="font-bold">Time:</Text>{" "}
                   {updateRoverData?.time}
                   {"\n"}

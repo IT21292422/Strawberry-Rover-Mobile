@@ -127,7 +127,7 @@ const Home = () => {
             value={latestData?.battery_status}
           />
         </View>
-      </View>{" "}
+      </View>
       <View className="flex flex-row justify-around items-center border rounded-full p-1 bg-gray-100 border-gray-400">
         <View className="flex flex-col gap-5 p-5 items-center">
           <View className="bg-yellow-500 w-48 h-14 rounded-full flex flex-row justify-center items-center gap-4">

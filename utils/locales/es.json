@@ -7,11 +7,16 @@
 
   "signin": "Iniciar Sesión",
   "signup": "Registrarse",
+  "signingUp": "Registrando...",
   "email": "Correo electrónico",
   "password": "Contraseña",
   "confirmPassword": "Confirmar Contraseña",
   "forgotPassword": "Olvidé mi contraseña",
   "username": "Nombre de usuario",
+  "rememberMe": "Recordarme",
+  "dontHaveAccount": "¿No tienes una cuenta?",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+  "createFreeAccount": "Crear una cuenta gratuita",
 
   "submit": "Enviar",
   "cancel": "Cancelar",

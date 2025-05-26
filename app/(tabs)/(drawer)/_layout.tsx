@@ -21,7 +21,7 @@ const DrawerLayout = () => {
             drawerLabel: t("images"),
             title: t("images"),
           }}
-        />{" "}
+        />
         <Drawer.Screen
           name="harvest"
           options={{
