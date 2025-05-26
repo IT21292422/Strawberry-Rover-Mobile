@@ -21,9 +21,11 @@ import useAuthStore from "@/store/AuthStore";
 import useRoverStore from "@/store/RoverStore";
 import { useShallow } from "zustand/react/shallow";
 import TodayPollinatedCard from "@/components/TodayPollinatedCard";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const [status, setStatus] = useState();
+  const { t } = useTranslation();
 
   const user = useAuthStore((state) => state.user);
   const {
@@ -64,15 +66,14 @@ const Home = () => {
       setStatus(operationStatus[0]?.roverStatus);
     }
   }, [operationStatus]);
-
   const handleSuccess = () => {
-    Alert.alert("Success", "Rover Status Updated Successfully");
+    Alert.alert(t("success"), t("roverStatusUpdated"));
   };
 
   const handleError = () => {
     Alert.alert(
-      "Error Updating Rover Status",
-      updateRoverError ? updateRoverError.toString() : "Unknown error"
+      t("errorUpdatingStatus"),
+      updateRoverError ? updateRoverError.toString() : t("unknownError")
     );
   };
 
@@ -97,17 +98,16 @@ const Home = () => {
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       )[0]
     : null;
-
   const selectRoverStatus = (status: number) => {
     switch (status) {
       case RoverStatus.START:
-        return "Running";
+        return t("statusRunning");
       case RoverStatus.STOP:
-        return "Stopped";
+        return t("statusStopped");
       case RoverStatus.PAUSE:
-        return "Paused";
+        return t("statusPaused");
       case RoverStatus.SERVICE:
-        return "Service";
+        return t("statusService");
       default:
         return "";
     }
@@ -117,10 +117,10 @@ const Home = () => {
     <ScreenWrapper>
       <View className="mb-6">
         <Text className="text-gray-900 mb-3 font-bold text-4xl text-left">
-          Welcome Back
+          {t("welcomeBack")}
         </Text>
         <Text className="text-gray-500 text-xl font-medium">
-          Here are some of the latest updates on your farm.
+          {t("farmUpdates")}
         </Text>
       </View>
       <View className="flex flex-row gap-5 mt-5 justify-center">
@@ -128,16 +128,18 @@ const Home = () => {
           iconName="thermometer-outline"
           iconColor="red"
           bgColor="bg-[#FFCBD5]"
-          name="Temperature"
+          name="temperature"
           value={"25"}
           isTemperature
+          useTranslation={true}
         />
         <StatusCard
           iconName="water"
           iconColor="blue"
           bgColor="bg-[#EDDCFC]"
-          name="Humidity"
+          name="humidity"
           value={"30"}
+          useTranslation={true}
         />
       </View>
       <View className="my-10">

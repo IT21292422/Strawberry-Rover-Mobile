@@ -10,6 +10,8 @@ import useAuthStore from "@/store/AuthStore";
 import { Checkbox } from "react-native-paper";
 import { Formik } from "formik";
 import { SignInSchema } from "@/utils/Validations/SignInValidation";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "@/components/LanguageSelector";
 
 interface FormValues {
   email: string;
@@ -18,6 +20,7 @@ interface FormValues {
 
 const SignIn = () => {
   const setUser = useAuthStore((state) => state.setUser);
+  const { t } = useTranslation();
 
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -55,9 +58,14 @@ const SignIn = () => {
         keyboardShouldPersistTaps="handled"
       >
         <SafeAreaView className="flex-1 justify-center">
-          <Text className="font-bold text-4xl text-white px-5">Sign In</Text>
+          <View className="flex-row justify-between items-center px-5 mb-2">
+            <Text className="font-bold text-4xl text-white px-5">
+              {t("signin")}
+            </Text>
+            <LanguageSelector isCompact={true} />
+          </View>
           <View className="w-full h-[450px] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
-            <Text className="text-2xl font-bold mt-10">Welcome Back!</Text>
+            <Text className="text-2xl font-bold mt-10">{t("welcome")}!</Text>
             <Formik
               initialValues={{
                 email: "",
@@ -76,7 +84,8 @@ const SignIn = () => {
               }) => (
                 <>
                   <CustomInputField
-                    placeholder="Email Address"
+                    placeholder="email"
+                    useTranslation={true}
                     value={values.email}
                     handleChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
@@ -84,7 +93,8 @@ const SignIn = () => {
                     error={touched.email && errors.email ? errors.email : ""}
                   />
                   <CustomInputField
-                    placeholder="Password"
+                    placeholder="password"
+                    useTranslation={true}
                     type="password"
                     value={values.password}
                     handleChangeText={handleChange("password")}
@@ -99,10 +109,10 @@ const SignIn = () => {
                       status={checked ? "checked" : "unchecked"}
                       onPress={() => setChecked(!checked)}
                     />
-                    <Text className="text-lg">Remember Me</Text>
+                    <Text className="text-lg">{t("rememberMe")}</Text>
                   </View>
                   <CustomButton
-                    label={loading ? "Signing In..." : "Sign In"}
+                    label={loading ? t("loading") : t("signin")}
                     onPress={handleSubmit}
                     containerStyles="mt-3"
                     textStyles="text-white"
@@ -112,12 +122,12 @@ const SignIn = () => {
               )}
             </Formik>
             <View className="justify-center pt-5 flex-row gap-2 items-center">
-              <Text className="text-lg">Don't have an account?</Text>
+              <Text className="text-lg">{t("dontHaveAccount")}</Text>
               <Link
                 href="/signup"
                 className="text-lg font-semibold text-secondary"
               >
-                Sign Up
+                {t("signup")}
               </Link>
             </View>
           </View>

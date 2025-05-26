@@ -1,6 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Ionicons as Icon } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 interface CustomInputFieldProps {
   value: string;
@@ -12,6 +13,7 @@ interface CustomInputFieldProps {
   onBlur?: (e: any) => void;
   borderStyles?: string;
   editable?: boolean;
+  useTranslation?: boolean;
 }
 
 const CustomInputField: React.FC<CustomInputFieldProps> = ({
@@ -24,20 +26,25 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
   onBlur,
   borderStyles,
   editable = true,
+  useTranslation: shouldTranslate = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const { t } = useTranslation();
+
+  const placeholderText = shouldTranslate ? t(placeholder) : placeholder;
 
   return (
     <View className={`space-y-2 ${containerStyles}`}>
       <View
+        testID="input-container"
         className={`flex-row bg-gray-100 w-full h-16 px-4 rounded-2xl justify-between items-center ${borderStyles} ${
           isFocused ? "border-2 border-primary" : "border border-gray-100"
         }`}
       >
         <TextInput
           className="text-xl"
-          placeholder={placeholder}
+          placeholder={placeholderText}
           value={value}
           onChangeText={handleChangeText}
           secureTextEntry={type === "password" && !showPassword}
@@ -49,7 +56,10 @@ const CustomInputField: React.FC<CustomInputFieldProps> = ({
           editable={editable}
         />
         {type === "password" && (
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+            accessibilityRole="button"
+          >
             <Icon
               name={!showPassword ? "eye" : "eye-off"}
               size={24}

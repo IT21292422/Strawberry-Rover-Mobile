@@ -1,5 +1,12 @@
 import { Formik } from "formik";
-import { View, Text, ImageBackground, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  Alert,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Images from "@/constants/Images";
@@ -11,6 +18,8 @@ import useAuthStore from "@/store/AuthStore";
 import { Checkbox } from "react-native-paper";
 import { SignUpSchema } from "@/utils/Validations/SignUpValidation";
 import { useCreateUser } from "@/utils/api";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "@/components/LanguageSelector";
 
 interface FormValues {
   username: string;
@@ -22,6 +31,7 @@ interface FormValues {
 const SignUp = () => {
   const setUser = useAuthStore((state) => state.setUser);
   const { mutate: createUser } = useCreateUser();
+  const { t } = useTranslation();
 
   const [checked, setChecked] = useState(false);
 
@@ -70,10 +80,15 @@ const SignUp = () => {
         keyboardShouldPersistTaps="handled"
       >
         <SafeAreaView className="flex-1 justify-center">
-          <Text className="font-bold text-4xl text-white px-5">Sign Up</Text>
+          <View className="flex-row justify-between items-center px-5 mb-2">
+            <Text className="font-bold text-4xl text-white px-5">
+              {t("signup")}
+            </Text>
+            <LanguageSelector isCompact={true} />
+          </View>
           <View className="w-full h-[620px] px-5 my-6 bg-white rounded-t-3xl rounded-b-3xl py-6">
             <Text className="text-2xl font-bold mt-10">
-              Create A Free Account
+              {t("createFreeAccount")}
             </Text>
             <Formik
               initialValues={{
@@ -96,7 +111,8 @@ const SignUp = () => {
               }) => (
                 <>
                   <CustomInputField
-                    placeholder="Username"
+                    placeholder="username"
+                    useTranslation={true}
                     value={values.username}
                     handleChangeText={handleChange("username")}
                     onBlur={handleBlur("username")}
@@ -106,7 +122,8 @@ const SignUp = () => {
                     }
                   />
                   <CustomInputField
-                    placeholder="Email Address"
+                    placeholder="email"
+                    useTranslation={true}
                     value={values.email}
                     handleChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
@@ -114,7 +131,8 @@ const SignUp = () => {
                     error={touched.email && errors.email ? errors.email : ""}
                   />
                   <CustomInputField
-                    placeholder="Password"
+                    placeholder="password"
+                    useTranslation={true}
                     type="password"
                     value={values.password}
                     handleChangeText={handleChange("password")}
@@ -125,7 +143,8 @@ const SignUp = () => {
                     }
                   />
                   <CustomInputField
-                    placeholder="Confirm Password"
+                    placeholder="confirmPassword"
+                    useTranslation={true}
                     type="password"
                     value={values.confirmPassword}
                     handleChangeText={handleChange("confirmPassword")}
@@ -144,10 +163,10 @@ const SignUp = () => {
                         setChecked(!checked);
                       }}
                     />
-                    <Text className="text-lg">Remember Me</Text>
+                    <Text className="text-lg">{t("rememberMe")}</Text>
                   </View>
                   <CustomButton
-                    label={loading ? "Signing Up..." : "Sign Up"}
+                    label={loading ? t("signingUp") : t("signup")}
                     onPress={handleSubmit}
                     containerStyles="mt-3"
                     textStyles="text-white"
@@ -157,12 +176,12 @@ const SignUp = () => {
               )}
             </Formik>
             <View className="justify-center pt-5 flex-row gap-2 items-center">
-              <Text className="text-lg">Already have an account?</Text>
+              <Text className="text-lg">{t("alreadyHaveAccount")}</Text>
               <Link
                 href="/signin"
                 className="text-lg font-semibold text-secondary"
               >
-                Sign In
+                {t("signin")}
               </Link>
             </View>
           </View>

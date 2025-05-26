@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { initializeAuth } from "@/utils/AuthUtils";
 import useAuthStore from "@/store/AuthStore";
+// Import i18n to initialize it
+import "@/utils/i18n";
 
 export default function RootLayout() {
   const queryClient = new QueryClient();

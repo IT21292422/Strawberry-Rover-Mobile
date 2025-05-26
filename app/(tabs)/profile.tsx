@@ -10,11 +10,14 @@ import { useShallow } from "zustand/react/shallow";
 import { Ionicons } from "@expo/vector-icons";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { useQueryClient } from "@tanstack/react-query";
+import LanguageSelector from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
   const setUser = useAuthStore((state) => state.setUser);
 
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const {
     roverBackendUrl,
@@ -37,12 +40,11 @@ const Profile = () => {
 
   const auth = getAuth();
   const user = auth.currentUser;
-
   const handleRoverBackendUrlChange = () => {
     if (isEditingRoverUrl) {
       setRoverBackendUrl(newRoverBackendUrl);
       queryClient.invalidateQueries({ queryKey: ["rover-operation-status"] });
-      Alert.alert("Success", "Rover Backend Url updated successfully");
+      Alert.alert(t("success"), t("roverBackendUrlUpdated"));
     }
     setIsEditingRoverUrl(!isEditingRoverUrl);
   };
@@ -51,42 +53,45 @@ const Profile = () => {
     if (isEditingImageUrl) {
       setImageServiceUrl(newImageServiceUrl);
       queryClient.invalidateQueries({ queryKey: ["get-rover-image-data"] });
-      Alert.alert("Success", "Image Service Url updated successfully");
+      Alert.alert(t("success"), t("imageServiceUrlUpdated"));
     }
     setIsEditingImageUrl(!isEditingImageUrl);
   };
-
   return (
     <ScreenWrapper>
       <ScrollView>
         <View className="flex-col items-center justify-center  my-4">
-          <Text className="text-2xl font-bold text-center">Profile</Text>
+          <Text className="text-2xl font-bold text-center">{t("profile")}</Text>
+          <View className="flex-row w-full justify-end items-center px-5 mb-2">
+            <LanguageSelector isCompact={true} />
+          </View>
           <Ionicons name="person-circle" size={100} />
         </View>
+
         <View className="w-full justify-center px-5">
           <View className="gap-2">
-            <Text className="text-xl font-bold">Username</Text>
+            <Text className="text-xl font-bold">{t("username")}</Text>
             <CustomInputField
-              placeholder="Username"
+              placeholder={t("username")}
               value={user?.displayName || ""}
               borderStyles="border-2 border-green-500"
               editable={false}
             />
           </View>
           <View className="gap-2">
-            <Text className="text-xl font-bold">Email</Text>
+            <Text className="text-xl font-bold">{t("email")}</Text>
             <CustomInputField
-              placeholder="Email Address"
+              placeholder={t("email")}
               value={user?.email || ""}
               borderStyles="border-2 border-green-500"
               editable={false}
             />
           </View>
           <View className="gap-2">
-            <Text className="text-xl font-bold">Rover Backend Url</Text>
+            <Text className="text-xl font-bold">{t("roverBackendUrl")}</Text>
             <View className="flex-row w-full gap-2">
               <CustomInputField
-                placeholder="Rover Backend Url"
+                placeholder={t("roverBackendUrl")}
                 value={newRoverBackendUrl || ""}
                 borderStyles="border-2 border-green-500"
                 containerStyles="flex-1"
@@ -95,17 +100,17 @@ const Profile = () => {
               />
               <CustomButton
                 onPress={handleRoverBackendUrlChange}
-                label={isEditingRoverUrl ? "Confirm" : "Edit"}
+                label={isEditingRoverUrl ? t("confirm") : t("edit")}
                 textStyles="text-white"
                 containerStyles="p-5 h-[48px]"
               />
             </View>
           </View>
           <View className="gap-2">
-            <Text className="text-xl font-bold">Image Service Url</Text>
+            <Text className="text-xl font-bold">{t("imageServiceUrl")}</Text>
             <View className="flex-row w-full gap-2">
               <CustomInputField
-                placeholder="Image Service Url"
+                placeholder={t("imageServiceUrl")}
                 value={newImageServiceUrl || ""}
                 borderStyles="border-2 border-green-500"
                 containerStyles="flex-1"
@@ -114,7 +119,7 @@ const Profile = () => {
               />
               <CustomButton
                 onPress={handleImageServiceUrlChange}
-                label={isEditingImageUrl ? "Confirm" : "Edit"}
+                label={isEditingImageUrl ? t("confirm") : t("edit")}
                 textStyles="text-white"
                 containerStyles="p-5 h-[48px]"
               />
@@ -122,7 +127,7 @@ const Profile = () => {
           </View>
           <CustomButton
             onPress={() => logout(setUser)}
-            label="Logout"
+            label={t("logout")}
             textStyles="text-white"
             containerStyles="p-5"
           />
