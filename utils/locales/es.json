@@ -1,0 +1,46 @@
+{
+  "appName": "Rover de Fresas",
+  "welcome": "Bienvenido",
+  "loading": "Cargando...",
+  "error": "Error",
+  "success": "Éxito",
+
+  "signin": "Iniciar Sesión",
+  "signup": "Registrarse",
+  "signingUp": "Registrando...",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "confirmPassword": "Confirmar Contraseña",
+  "forgotPassword": "Olvidé mi contraseña",
+  "username": "Nombre de usuario",
+  "rememberMe": "Recordarme",
+  "dontHaveAccount": "¿No tienes una cuenta?",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+  "createFreeAccount": "Crear una cuenta gratuita",
+
+  "submit": "Enviar",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "delete": "Eliminar",
+  "edit": "Editar",
+  "logout": "Cerrar sesión",
+  "confirm": "Confirmar",
+
+  "home": "Inicio",
+  "profile": "Perfil",
+  "analytics": "Análisis",
+  "roverMonitor": "Monitor de Rover",
+  "harvest": "Cosecha",
+  "images": "Imágenes",
+
+  "todayPollinatedTitle": "Polinizado Hoy",
+  "statusTitle": "Estado",
+  "timelineTitle": "Cronología",
+
+  "language": "Idioma",
+  "languageEnglish": "Inglés",
+  "languageFrench": "Francés",
+  "languageSpanish": "Español",
+  "languageSinhala": "Cingalés",
+  "changeLanguage": "Cambiar Idioma"
+}

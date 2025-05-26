@@ -1,15 +1,18 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const DrawerLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer>
         <Drawer.Screen
           name="home"
           options={{
-            drawerLabel: "Home",
+            drawerLabel: t("home"),
             title: "",
             drawerIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />

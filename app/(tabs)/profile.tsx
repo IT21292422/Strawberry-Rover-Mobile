@@ -10,11 +10,14 @@ import { useShallow } from "zustand/react/shallow";
 import { Ionicons } from "@expo/vector-icons";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { useQueryClient } from "@tanstack/react-query";
+import LanguageSelector from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
   const setUser = useAuthStore((state) => state.setUser);
 
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const {
     roverBackendUrl,
@@ -37,7 +40,6 @@ const Profile = () => {
 
   const auth = getAuth();
   const user = auth.currentUser;
-
   const handleRoverBackendUrlChange = () => {
     if (isEditingRoverUrl) {
       setRoverBackendUrl(newRoverBackendUrl);
@@ -55,7 +57,6 @@ const Profile = () => {
     }
     setIsEditingImageUrl(!isEditingImageUrl);
   };
-
   return (
     <ScreenWrapper>
       <ScrollView>

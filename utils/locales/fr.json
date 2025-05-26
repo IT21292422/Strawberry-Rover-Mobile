@@ -1,0 +1,46 @@
+{
+  "appName": "Rover de Fraises",
+  "welcome": "Bienvenue",
+  "loading": "Chargement...",
+  "error": "Erreur",
+  "success": "Succès",
+
+  "signin": "Se connecter",
+  "signup": "S'inscrire",
+  "signingUp": "Inscription en cours...",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "confirmPassword": "Confirmer le mot de passe",
+  "forgotPassword": "Mot de passe oublié",
+  "username": "Nom d'utilisateur",
+  "rememberMe": "Se souvenir de moi",
+  "dontHaveAccount": "Vous n'avez pas de compte?",
+  "alreadyHaveAccount": "Vous avez déjà un compte?",
+  "createFreeAccount": "Créer un compte gratuit",
+
+  "submit": "Soumettre",
+  "cancel": "Annuler",
+  "save": "Enregistrer",
+  "delete": "Supprimer",
+  "edit": "Modifier",
+  "logout": "Déconnexion",
+  "confirm": "Confirmer",
+
+  "home": "Accueil",
+  "profile": "Profil",
+  "analytics": "Analyses",
+  "roverMonitor": "Moniteur Rover",
+  "harvest": "Récolte",
+  "images": "Images",
+
+  "todayPollinatedTitle": "Aujourd'hui Pollinisé",
+  "statusTitle": "Statut",
+  "timelineTitle": "Chronologie",
+
+  "language": "Langue",
+  "languageEnglish": "Anglais",
+  "languageFrench": "Français",
+  "languageSpanish": "Espagnol",
+  "languageSinhala": "Cinghalais",
+  "changeLanguage": "Changer de langue"
+}

@@ -1,0 +1,46 @@
+{
+  "appName": "Strawberry Rover",
+  "welcome": "Welcome",
+  "loading": "Loading...",
+  "error": "Error",
+  "success": "Success",
+
+  "signin": "Sign In",
+  "signup": "Sign Up",
+  "signingUp": "Signing Up...",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "forgotPassword": "Forgot Password",
+  "username": "Username",
+  "rememberMe": "Remember Me",
+  "dontHaveAccount": "Don't have an account?",
+  "alreadyHaveAccount": "Already have an account?",
+  "createFreeAccount": "Create A Free Account",
+
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "logout": "Logout",
+  "confirm": "Confirm",
+
+  "home": "Home",
+  "profile": "Profile",
+  "analytics": "Analytics",
+  "roverMonitor": "Rover Monitor",
+  "harvest": "Harvest",
+  "images": "Images",
+
+  "todayPollinatedTitle": "Today Pollinated",
+  "statusTitle": "Status",
+  "timelineTitle": "Timeline",
+
+  "language": "Language",
+  "languageEnglish": "English",
+  "languageFrench": "French",
+  "languageSpanish": "Spanish",
+  "languageSinhala": "Sinhala",
+  "changeLanguage": "Change Language"
+}
