@@ -5,8 +5,10 @@ import { FlatList } from "react-native-gesture-handler";
 import { Image } from "expo-image";
 import useRoverStore from "@/store/RoverStore";
 import data from "@/constants/imageData.json";
+import { useTranslation } from "react-i18next";
 
 const Images = () => {
+  const { t } = useTranslation();
   // const currentRoverId = useRoverStore((state) => state.currentRoverId);
   // const { data: roverData } = useGetRoverImageData(currentRoverId);
   // const sortedDataByLatest = roverData
@@ -18,6 +20,7 @@ const Images = () => {
 
   return (
     <ScreenWrapper>
+      <Text className="text-2xl font-bold text-center my-4">{t("images")}</Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
@@ -28,13 +31,13 @@ const Images = () => {
               style={{ width: "100%", height: 200 }}
             />
             <Text className="text-center mt-2 text-gray-600">
-              Captured: {new Date(item.created_at).toLocaleString()}
+              {t("captured")}: {new Date(item.created_at).toLocaleString()}
             </Text>
             <Text className="text-center mt-2 text-gray-600">
-              Temperature: {item.temp}°C
+              {t("temperature")}: {item.temp}°C
             </Text>
             <Text className="text-center mt-2 text-gray-600">
-              Humidity: {item.humidity}%
+              {t("humidity")}: {item.humidity}%
             </Text>
           </View>
         )}

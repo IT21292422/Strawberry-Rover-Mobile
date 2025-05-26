@@ -5,12 +5,14 @@ import { useGetRoverImageData } from "@/utils/api";
 import { RoverImageData } from "@/utils/types/Types";
 import TimelineCard from "@/components/TimelineCard";
 import { DateTime, Duration } from "luxon";
+import { useTranslation } from "react-i18next";
 
 interface GroupedByDate {
   [date: string]: Date[];
 }
 
 const PollinationTimeline = () => {
+  const { t } = useTranslation();
   // const currentRoverId = useRoverStore((state) => state.currentRoverId);
   // const { data: roverData } = useGetRoverImageData(currentRoverId);
 
@@ -60,6 +62,9 @@ const PollinationTimeline = () => {
 
   return (
     <View style={{ padding: 20 }}>
+      <Text className="text-2xl font-bold text-center my-4">
+        {t("pollinationTimeline")}
+      </Text>
       <FlatList
         data={pollination}
         keyExtractor={(item) => item.date}

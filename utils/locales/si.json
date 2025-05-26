@@ -32,15 +32,46 @@
   "roverMonitor": "රෝවර් නිරීක්ෂකය",
   "harvest": "අස්වැන්න",
   "images": "රූප",
-
   "todayPollinatedTitle": "අද පරාගනය කළ",
+  "totalPollinatedToday": "අද පරාගනය කළ මුළු ගණන",
   "statusTitle": "තත්ත්වය",
   "timelineTitle": "කාලරේඛාව",
-
   "language": "භාෂාව",
   "languageEnglish": "ඉංග්‍රීසි",
   "languageFrench": "ප්‍රංශ",
   "languageSpanish": "ස්පාඤ්ඤ",
   "languageSinhala": "සිංහල",
-  "changeLanguage": "භාෂාව වෙනස් කරන්න"
+  "changeLanguage": "භාෂාව වෙනස් කරන්න",
+
+  "welcomeBack": "ආයුබෝවන්",
+  "farmUpdates": "මෙන්න ඔබේ ගොවිපොළ පිළිබඳ නවතම යාවත්කාලීන තොරතුරු.",
+  "temperature": "උෂ්ණත්වය",
+  "humidity": "ආර්ද්‍රතාවය",
+
+  "statusRunning": "ක්‍රියාත්මක වේ",
+  "statusStopped": "නවතා ඇත",
+  "statusPaused": "විරාමයක් ගෙන ඇත",
+  "statusService": "සේවා කටයුතු",
+
+  "roverBackendUrl": "රෝවර් බැක්එන්ඩ් URL",
+  "imageServiceUrl": "රූප සේවා URL",
+  "roverBackendUrlUpdated": "රෝවර් බැක්එන්ඩ් URL සාර්ථකව යාවත්කාලීන කරන ලදී",
+  "imageServiceUrlUpdated": "රූප සේවා URL සාර්ථකව යාවත්කාලීන කරන ලදී",
+  "roverStatusUpdated": "රෝවර් තත්ත්වය සාර්ථකව යාවත්කාලීන කරන ලදී",
+  "errorUpdatingStatus": "රෝවර් තත්ත්වය යාවත්කාලීන කිරීමේදී දෝෂයක් සිදුවිය",
+  "unknownError": "නොදන්නා දෝෂයකි",
+
+  "flowerAnalytics": "මල් විශ්ලේෂණය",
+  "weekly": "සතිපතා",
+  "monthly": "මාසික",
+  "flowersPollinatedBy": "පරාගනය කළ මල්",
+  "noDataAvailable": "දත්ත නොමැත",
+  "statsFor": "සඳහා සංඛ්‍යාලේඛන",
+  "currentRover": "වර්තමාන රෝවර්",
+  "totalFlowers": "මුළු මල් ගණන",
+  "avgPerDay": "දිනකට සාමාන්‍ය",
+  "percentOfTotal": "මුළු ප්‍රතිශතය",
+  "pollinationTimeline": "පරාගනය කාලරේඛාව",
+  "captured": "ග්‍රහණය කළ",
+  "workedHoursOn": "වැඩ කළ පැය ගණන"
 }

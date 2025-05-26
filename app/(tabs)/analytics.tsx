@@ -7,8 +7,11 @@ import useRoverStore from "@/store/RoverStore";
 import { useShallow } from "zustand/react/shallow";
 import { DateTime } from "luxon";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const Analytics = () => {
+  const { t } = useTranslation();
+
   // Active tab state (weekly or monthly)
   const [activeTab, setActiveTab] = useState("weekly");
   const [flowers, setFlowers] = useState(50);
@@ -154,7 +157,6 @@ const Analytics = () => {
       .plus({ days: 6 })
       .toFormat("MMM d, yyyy")}`;
   const getMonthTitle = () => monthStart.toFormat("MMMM yyyy");
-
   // Get rover name
   const getRoverName = () => {
     // if (!flowerData) return "Current Rover";
@@ -162,42 +164,42 @@ const Analytics = () => {
     // const rover = flowerData.by_rover.find(
     //   (r) => r.rover_id === currentRoverId
     // );
-    return "Current Rover";
+    return t("currentRover");
   };
-
   return (
     <ScreenWrapper>
       <ScrollView className="px-4">
         <Text className="text-2xl font-bold text-center my-4">
-          Flower Analytics
+          {t("flowerAnalytics")}
         </Text>
-
         {/* Tab selector */}
         <View className="flex-row justify-center my-4">
-          {["weekly", "monthly"].map((tab) => (
+          {[
+            { id: "weekly", label: "weekly" },
+            { id: "monthly", label: "monthly" },
+          ].map((tab) => (
             <TouchableOpacity
-              key={tab}
-              onPress={() => setActiveTab(tab)}
+              key={tab.id}
+              onPress={() => setActiveTab(tab.id)}
               className={`mx-2 px-4 py-2 rounded-lg ${
-                activeTab === tab ? "bg-blue-500" : "bg-gray-200"
+                activeTab === tab.id ? "bg-blue-500" : "bg-gray-200"
               }`}
             >
               <Text
                 className={`font-medium ${
-                  activeTab === tab ? "text-white" : "text-gray-700"
+                  activeTab === tab.id ? "text-white" : "text-gray-700"
                 }`}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {t(tab.label)}
               </Text>
             </TouchableOpacity>
           ))}
         </View>
-
         {/* Total count display */}
         {/* {flowerData && ( */}
         <View className="bg-blue-50 p-4 rounded-lg mb-4">
           <Text className="text-lg font-semibold text-center">
-            Flowers Pollinated by {getRoverName()}
+            {t("flowersPollinatedBy")} {getRoverName()}
           </Text>
           <Text className="text-3xl font-bold text-center text-blue-600">
             {flowers}
@@ -207,7 +209,6 @@ const Analytics = () => {
           </Text>
         </View>
         {/* )} */}
-
         {/* Period navigation and chart */}
         <View className="mb-6">
           <View className="flex-row justify-between items-center mb-4">
@@ -277,26 +278,25 @@ const Analytics = () => {
                   />
                 )
               ) : (
-                <Text className="text-center p-4">No data available</Text>
+                <Text className="text-center p-4">{t("noDataAvailable")}</Text>
               )}
             </View>
           }
         </View>
-
         {/* Additional stats */}
         {/* {flowerData && ( */}
         <View className="mb-6 bg-white p-4 rounded-lg">
           <Text className="text-xl font-bold text-center mb-4">
-            Stats for {getRoverName()}
+            {t("statsFor")} {getRoverName()}
           </Text>
 
           <View className="flex-row justify-between mb-2">
-            <Text className="text-gray-600">Total Flowers:</Text>
+            <Text className="text-gray-600">{t("totalFlowers")}:</Text>
             <Text className="font-bold">{flowers}</Text>
           </View>
 
           <View className="flex-row justify-between mb-2">
-            <Text className="text-gray-600">Avg. Per Day:</Text>
+            <Text className="text-gray-600">{t("avgPerDay")}:</Text>
             <Text className="font-bold">
               {activeTab === "weekly"
                 ? Math.round(flowers / 7)
@@ -305,7 +305,7 @@ const Analytics = () => {
           </View>
 
           <View className="flex-row justify-between">
-            <Text className="text-gray-600">% of Total:</Text>
+            <Text className="text-gray-600">{t("percentOfTotal")}:</Text>
             <Text className="font-bold">
               {/* {flowerData.net_count > 0 */}
               {((flowers / 30) * 100).toFixed(1) + "%"}

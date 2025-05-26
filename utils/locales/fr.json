@@ -32,15 +32,45 @@
   "roverMonitor": "Moniteur Rover",
   "harvest": "Récolte",
   "images": "Images",
-
   "todayPollinatedTitle": "Aujourd'hui Pollinisé",
+  "totalPollinatedToday": "Total Pollinisé Aujourd'hui",
   "statusTitle": "Statut",
   "timelineTitle": "Chronologie",
-
   "language": "Langue",
   "languageEnglish": "Anglais",
   "languageFrench": "Français",
   "languageSpanish": "Espagnol",
   "languageSinhala": "Cinghalais",
-  "changeLanguage": "Changer de langue"
+  "changeLanguage": "Changer de langue",
+
+  "welcomeBack": "Bienvenue de retour",
+  "farmUpdates": "Voici les dernières mises à jour de votre ferme.",
+  "temperature": "Température",
+  "humidity": "Humidité",
+
+  "statusRunning": "En marche",
+  "statusStopped": "Arrêté",
+  "statusPaused": "En pause",
+  "statusService": "En maintenance",
+  "roverBackendUrl": "URL du backend Rover",
+  "imageServiceUrl": "URL du service d'images",
+  "roverBackendUrlUpdated": "URL du backend Rover mise à jour avec succès",
+  "imageServiceUrlUpdated": "URL du service d'images mise à jour avec succès",
+  "roverStatusUpdated": "Statut du Rover mis à jour avec succès",
+  "errorUpdatingStatus": "Erreur lors de la mise à jour du statut du Rover",
+  "unknownError": "Erreur inconnue",
+
+  "flowerAnalytics": "Analyses des Fleurs",
+  "weekly": "Hebdomadaire",
+  "monthly": "Mensuel",
+  "flowersPollinatedBy": "Fleurs pollinisées par",
+  "noDataAvailable": "Aucune donnée disponible",
+  "statsFor": "Statistiques pour",
+  "currentRover": "Rover Actuel",
+  "totalFlowers": "Total des Fleurs",
+  "avgPerDay": "Moyenne par Jour",
+  "percentOfTotal": "% du Total",
+  "pollinationTimeline": "Chronologie de Pollinisation",
+  "captured": "Capturé",
+  "workedHoursOn": "Heures travaillées le"
 }
