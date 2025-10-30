@@ -3,12 +3,19 @@
 A mobile application for monitoring and controlling autonomous strawberry pollination rover. Built with React Native and Expo, this app provides near real-time rover visualization using Three.js, rover control interfaces, and comprehensive analytics for precision agriculture operations.
 
 ## 🎢 Product Website
+[BumbleB](https://bumble-b-web.vercel.app/)
 
 ## 📘 Architecture
+<img width="500" height="600" alt="arch" src="https://github.com/user-attachments/assets/23c826a7-f43f-4d93-95f4-ae2cbed8e207" />
+
 
 ## ⛳ 3D Model Repository
+[3D Rover Repository](https://github.com/IT21292422/Strawberry-3D-Rover-Model)
 
 ## 📸 Screenshots
+<img width="2666" height="1080" alt="04" src="https://github.com/user-attachments/assets/c0914276-f29d-4952-a999-83712ec30ba3" />
+
+[Video Demo](https://drive.google.com/file/d/1-Jxcae3eU3iBs6Lq_LjwBnZ7XuCvH2pX/view?usp=sharing)
 
 ## 📋 Table of Contents
 
