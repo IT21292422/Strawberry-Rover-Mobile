@@ -1,50 +1,321 @@
-# Welcome to your Expo app 👋
+# 🍓 Mobile App For Strawberry Pollinating Rover
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile application for monitoring and controlling autonomous strawberry pollination rover. Built with React Native and Expo, this app provides near real-time rover visualization using Three.js, rover control interfaces, and comprehensive analytics for precision agriculture operations.
 
-## Get started
+## 🎢 Product Website
 
-1. Install dependencies
+## 📘 Architecture
+
+## ⛳ 3D Model Repository
+
+## 📸 Screenshots
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Available Scripts](#available-scripts)
+- [Configuration](#configuration)
+
+## 🎯 Overview
+
+The Strawberry Rover Mobile app is designed to help farmers, monitor autonomous pollination rovers in strawberry fields. It provides a comprehensive mobile interface for:
+
+- **Near Real-time monitoring** of rover status and operational metrics
+- **Data visualization** through interactive charts and analytics dashboards
+- **Pollination tracking** with detailed timelines and historical data
+- **Image galleries** showing captured field photos organized by date and mission
+- **Multi-language support** for international agricultural operations
+- **Secure authentication** for user management
+
+The app bridges the gap between autonomous agricultural technology and hands-on farm management, making precision pollination accessible and actionable.
+
+## ✨ Key Features
+
+### 🌍 Internationalization (i18n)
+
+- Multi-language support (English, Spanish, French, Sinhala)
+- Dynamic language switching
+- Implemented using `react-i18next` and `expo-localization`
+
+### 🔐 Authentication & User Management
+
+- Secure sign-in and sign-up flows
+- Firebase Authentication integration
+- Persistent session management with secure storage
+- User profile management
+
+### 🤖 Rover Monitoring & Control
+
+- Near real-time rover status dashboard
+- 3D Visualization of the Rover using Three.js
+- Status cards showing key metrics
+
+### 📊 Data Visualization & Analytics
+
+- Interactive charts powered by `react-native-gifted-charts`
+- Weekly/Monthly analytics views
+
+### 🖼️ Image Gallery
+
+- Browse photos captured by rovers
+
+### 💾 State Management
+
+- Zustand for lightweight, efficient state management
+- Separate stores for Auth, Backend URL, and Rover data
+
+## 🛠️ Technologies Used
+
+### Core Framework
+
+- **React Native** - Cross-platform mobile development
+- **Expo** - Development platform and toolchain
+- **TypeScript** - Type-safe JavaScript
+
+### UI & Styling
+
+- **NativeWind** - Tailwind CSS for React Native
+- **React Native Paper** - Material Design components
+
+### State & Data Management
+
+- **Zustand** - Lightweight state management
+- **TanStack React Query** - Server state management
+- **Axios** - HTTP client for API requests
+
+### Authentication & Storage
+
+- **Firebase** - Authentication and backend services
+- **Expo Secure Store** - Secure credential storage
+- **AsyncStorage** - Local data persistence
+
+### Internationalization
+
+- **i18next** - Internationalization framework
+- **react-i18next** - React bindings for i18next
+- **expo-localization** - Device locale detection
+
+### Data Visualization
+
+- **react-native-gifted-charts** - Chart library
+
+### Forms & Validation
+
+- **Formik** - Form management
+- **Yup** - Schema validation
+
+### Testing
+
+- **Jest** - Testing framework
+- **@testing-library/react-native** - Component testing
+- **jest-expo** - Expo-specific Jest configuration
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** (16.x or higher)
+- **npm** or **yarn**
+- **Android Studio** (for Android development)
+- **Xcode** (for iOS development, macOS only)
+- **Expo CLI** (optional, but recommended)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/IT21292422/Strawberry-Rover-Mobile.git
+   cd Strawberry-Rover-Mobile
+   ```
+
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Configure environment variables**
 
-   ```bash
-    npx expo start
+   Create a `.env` file in the root directory (if needed) and add your configuration:
+
+   ```env
+   FIREBASE_API_KEY=your_api_key
+   FIREBASE_AUTH_DOMAIN=your_auth_domain
+   # Add other environment variables as needed
    ```
 
-In the output, you'll find options to open the app in a
+4. **Update Firebase configuration**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   Edit `config/firebase.tsx` with your Firebase project credentials.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Running the App
 
-## Get a fresh project
+#### Development Mode
 
-When you're ready, run:
+Start the Expo development server:
 
 ```bash
-npm run reset-project
+npm run start
+# or
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+#### Run on Android
 
-## Learn more
+```bash
+npm run android
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Make sure you have:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Android Studio installed
+- An Android emulator running, or
+- A physical device connected via USB with USB debugging enabled
 
-## Join the community
+#### Run on iOS (macOS only)
 
-Join our community of developers creating universal apps.
+```bash
+npm run ios
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Requires Xcode and iOS Simulator.
+
+#### Run on Web
+
+```bash
+npm run web
+```
+
+## 📦 Building for Production
+
+### ⚙️ CI/CD
+
+Automated APK Builds with Expo. Every push to the main branch triggers a GitHub Actions workflow that builds the Android APK using EAS Build, Expo’s cloud-based build service.
+
+### Build Profiles
+
+Build profiles are defined in `eas.json`. Common profiles:
+
+## �📁 Project Structure
+
+```
+Strawberry-Rover-Mobile/
+├── app/                          # Application routes (Expo Router)
+│   ├── _layout.tsx              # Root layout
+│   ├── index.tsx                # Entry screen
+│   ├── (auth)/                  # Authentication screens
+│   │   ├── signin.tsx          # Sign in page
+│   │   └── signup.tsx          # Sign up page
+│   └── (tabs)/                  # Main app with tabs
+│       ├── _layout.tsx         # Tab layout
+│       ├── analytics.tsx       # Analytics dashboard
+│       ├── profile.tsx         # User profile
+│       ├── rover-monitor.tsx   # Rover monitoring
+│       └── (drawer)/           # Drawer navigation
+│           ├── home.tsx        # Home screen
+│           ├── images.tsx      # Image gallery
+│           └── pollination-timeline.tsx
+│
+├── components/                  # Reusable UI components
+│   ├── CustomButton.tsx
+│   ├── CustomInputField.tsx
+│   ├── LanguageSelector.tsx
+│   ├── ScreenWrapper.tsx
+│   ├── StatusCard.tsx
+│   ├── TimelineCard.tsx
+│   ├── TodayPollinatedCard.tsx
+│   └── __tests__/              # Component tests
+│
+├── config/                      # Configuration files
+│   └── firebase.tsx            # Firebase configuration
+│
+├── store/                       # State management (Zustand)
+│   ├── AuthStore.ts            # Authentication state
+│   ├── BackendUrlStore.ts      # API endpoint configuration
+│   └── RoverStore.ts           # Rover data state
+│
+├── utils/                       # Utility functions
+│   ├── api.ts                  # API client
+│   ├── i18n.ts                 # Internationalization setup
+│   ├── AuthUtils.ts            # Auth helpers
+│   ├── SecureStoreUtils.ts     # Secure storage helpers
+│   ├── locales/                # Translation files
+│   │   ├── en.json
+│   │   ├── es.json
+│   │   ├── fr.json
+│   │   └── si.json
+│   ├── types/                  # TypeScript type definitions
+│   └── Validations/            # Form validation schemas
+│
+├── assets/                      # Static assets
+│   ├── fonts/
+│   ├── icons/
+│   └── images/
+│
+├── android/                     # Android native project
+├── coverage/                    # Test coverage reports
+├── docs/                        # Documentation
+│
+├── package.json                 # Dependencies and scripts
+├── tsconfig.json               # TypeScript configuration
+├── tailwind.config.js          # Tailwind CSS configuration
+├── babel.config.js             # Babel configuration
+└── app.json                    # Expo configuration
+```
+
+### Key Directories Explained
+
+- **`app/`** - Contains all application screens using Expo Router's file-based routing system
+- **`components/`** - Reusable React components with tests
+- **`store/`** - Zustand state management stores
+- **`utils/`** - Helper functions, API clients, validators, and localization
+- **`config/`** - App configuration (Firebase, environment settings)
+- **`assets/`** - Images, fonts, icons, and other static resources
+
+## 📜 Available Scripts
+
+- **`npm run start`** - Start Expo development server
+- **`npm run android`** - Run on Android device/emulator
+- **`npm run ios`** - Run on iOS simulator (macOS only)
+- **`npm run web`** - Run on web browser
+- **`npm run test`** - Run Jest tests in watch mode
+- **`npm run lint`** - Run ESLint to check code quality
+- **`npm run reset-project`** - Reset to blank project template
+
+## 🧪 Testing
+
+The project uses Jest and React Native Testing Library for unit and component testing.
+
+### Run Tests
+
+```bash
+npm run test
+```
+
+### View Coverage Report
+
+Test coverage reports are generated in the `coverage/` directory. Open `coverage/lcov-report/index.html` in a browser to view detailed coverage.
+
+Current test coverage includes:
+
+- Custom components (Button, Input, Cards)
+- Screen wrappers
+- Key UI components
+
+## ⚙️ Configuration
+
+### Firebase Setup
+
+1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+2. Enable Authentication (Email/Password)
+3. Update `config/firebase.tsx` with your project credentials
+4. Configure security rules for your database/storage
+
+### Backend API
+
+Update the backend URL of both the Rust Server and Python Server in the `.env` file.
