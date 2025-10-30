@@ -148,12 +148,18 @@ The app bridges the gap between autonomous agricultural technology and hands-on 
 
 3. **Configure environment variables**
 
-   Create a `.env` file in the root directory (if needed) and add your configuration:
+   Create a `.env` file in the root directory and add your configuration:
 
    ```env
-   FIREBASE_API_KEY=your_api_key
-   FIREBASE_AUTH_DOMAIN=your_auth_domain
-   # Add other environment variables as needed
+   EXPO_PUBLIC_API_KEY=
+   EXPO_PUBLIC_AUTH_DOMAIN=
+   EXPO_PUBLIC_PROJECT_ID=
+   EXPO_PUBLIC_STORAGE_BUCKET=
+   EXPO_PUBLIC_MESSAGING_SENDER_ID=
+   EXPO_PUBLIC_APP_ID=
+   EXPO_PUBLIC_ROVER_BACKEND=
+   EXPO_PUBLIC_3D_MODEL_FRONTEND=
+   EXPO_PUBLIC_IMAGE_SERVICE=
    ```
 
 4. **Update Firebase configuration**
@@ -183,20 +189,6 @@ Make sure you have:
 - Android Studio installed
 - An Android emulator running, or
 - A physical device connected via USB with USB debugging enabled
-
-#### Run on iOS (macOS only)
-
-```bash
-npm run ios
-```
-
-Requires Xcode and iOS Simulator.
-
-#### Run on Web
-
-```bash
-npm run web
-```
 
 ## 📦 Building for Production
 
